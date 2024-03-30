@@ -73,13 +73,10 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" href="about_and_contact.html">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="shop.html">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -99,105 +96,41 @@
     <!-- Close Header -->
 
     <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 
 
     <!-- Start Content Page -->
     <div class="container-fluid bg-light py-5">
-        <div class="col-md-6 m-auto text-center">
-            <h1 class="h1">Contact Us</h1>
-            <p>
-                Proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet.
-            </p>
-        </div>
-    </div>
-
-    <div class="container pb-5">
         <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="contact-form" method="post" action="" role="form">
-                            <div class="messages"></div>
-                            <div class="controls">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_name">Firstname *</label>
-                                            <input id="form_name" type="text" name="name" class="form-control"
-                                                placeholder="Please enter your firstname *" required="required"
-                                                data-error="Firstname is required.">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="form_lastname">Lastname *</label>
-                                            <input id="form_lastname" type="text" name="surname"
-                                                class="form-control" placeholder="Please enter your lastname *"
-                                                required="required" data-error="Lastname is required.">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="form_email">Email *</label>
-                                            <input id="form_email" type="email" name="email" class="form-control"
-                                                placeholder="Please enter your email *" required="required"
-                                                data-error="Valid email is required.">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="form_phone">Phone</label>
-                                            <input id="form_phone" type="tel" name="phone" class="form-control"
-                                                placeholder="Please enter your phone">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="form_message">Message *</label>
-                                    <textarea id="form_message" name="message" class="form-control"
-                                        placeholder="Message for me *" rows="4" required="required"
-                                        data-error="Please, leave us a message."></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn btn-success btn-send" value="Send message">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <!-- Sección del mapa -->
+            <div class="col-md-6">
+                <h3 class="h2 text-success border-bottom pb-3 border-light text-center">Encuentranos aqui</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1453081460645!2d-73.12492861465859!3d7.109153774572862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e683fc4e1e8d437%3A0xc2ac2217608ecaa5!2sMuebles%20Equi-Ofis!5e0!3m2!1ses!2sco!4v1711830797775!5m2!1ses!2sco" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="map" style="height: 400px;"></div>
+            <!-- Sección del formulario -->
+            <div class="col-md-6">
+                <h3 class="h2 text-success border-bottom pb-3 border-light text-center">Contactanos</h3>
+                <form action="contact.php" method="post">
+                    <div class="mb-3">
+                        <label for="h2 text-success border-bottom pb-3 border-light logo name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Monica Santander">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="h2 text-success border-bottom pb-3 border-light logo email" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="h2 text-success border-bottom pb-3 border-light logo message" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
             </div>
-
         </div>
     </div>
 
