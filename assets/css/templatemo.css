@@ -1,8 +1,6 @@
 /*
 
-TemplateMo 559 Zay Shop
-
-https://templatemo.com/tm-559-zay-shop
+TemplateMo 559 Equi-Ofis Shop
 
 ---------------------------------------------
 Table of contents
@@ -75,7 +73,7 @@ body, ul, li, p, a, label, input, div {
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
 
 /* Hero Carousel */
-#template-mo-zay-hero-carousel { background: #efefef !important;}
+#template-mo-Equi-Ofis-hero-carousel { background: #efefef !important;}
 /* Accordion */
 .templatemo-accordion a { color: #000;}
 .templatemo-accordion a:hover { color: #333d4a;}
@@ -115,12 +113,12 @@ body, ul, li, p, a, label, input, div {
   opacity: 1;
 }
 /* Carousel Hero */
-#template-mo-zay-hero-carousel .carousel-indicators li {
+#template-mo-Equi-Ofis-hero-carousel .carousel-indicators li {
   margin-top: -50px;
   background-color: #59ab6e;
 }
-#template-mo-zay-hero-carousel .carousel-control-next i,
-#template-mo-zay-hero-carousel .carousel-control-prev i {
+#template-mo-Equi-Ofis-hero-carousel .carousel-control-next i,
+#template-mo-Equi-Ofis-hero-carousel .carousel-control-prev i {
   color: #59ab6e !important;
   font-size: 2.8em !important;
 }
@@ -129,6 +127,12 @@ body, ul, li, p, a, label, input, div {
   font-size: .5em !important;
   color: #000 !important;
 }
+
+.tempaltemo-carousel, .carousel-control-next, .carousel-control-prev, .carousel-item, .carousel, .carousel-control-inner, .carousel-indicators li, .carousel-indicators li.active, .carousel-indicators li:hover, .carousel-inner, .carousel-inner img{
+  background: white !important;
+}
+
+
 /* Services */
 .services-icon-wap {transition: .3s;}
 .services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
@@ -167,19 +171,20 @@ body, ul, li, p, a, label, input, div {
   height: 6px;
 }
 
+
 @media (min-width: 576px) {
-  .tempaltemo-carousel .h1 { font-size: 1em !important;}
+  .tempaltemo-carousel .h1 { font-size: 1em !important; background: white;}
 }
 
 /*// Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
-  #templatemo_main_nav .navbar-nav {max-width: 450px;}
+  #templatemo_main_nav .navbar-nav {max-width: 450px; background: white;}
  }
 
 /* Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   #templatemo_main_nav .navbar-nav {max-width: 550px;}
-  #template-mo-zay-hero-carousel .carousel-item {min-height: 30rem !important;}
+  #template-mo-Equi-Ofis-hero-carousel .carousel-item {min-height: 30rem !important;}
   .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {font-size: 18px !important;}
   .product-wap .product-color-dot {
     width: 12px;
