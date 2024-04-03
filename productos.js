@@ -1,31 +1,26 @@
-const csv = require('csv-parser');
-const fs = require('fs');
+// URL del archivo CSV
+const url = 'productos.csv';
 
-const resultados = [];
+// Hacer una solicitud fetch para obtener el archivo CSV
+fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('No se pudo cargar el archivo CSV');
+    }
+    return response.text();
+  })
+  .then(data => {
+    // Divide los datos por líneas y crea un array de productos
+    const lines = data.split('\n');
+    const productos = lines.map(line => {
+      const [nombre, clase, subclase, referenciaExterna, ruta] = line.split('\t');
+      return { Nombre: nombre, Clase: clase, Subclase: subclase, Referencia_Externa: referenciaExterna, Ruta: ruta };
+    });
 
-fs.createReadStream('productos.csv')
-  .pipe(csv())
-  .on('data', (data) => resultados.push(data))
-  .on('end', () => {
-
-    //Exportar funciones
-    module.exports.buscarProducto = buscarProducto;
-    module.exports.buscarClase = buscarClase;
-
-    //Exportar resultados
-    module.exports.resultados = resultados;
-
-  });
-
-// Función para buscar un producto específico
-function buscarProducto(nombreProducto) {
-  let producto = resultados.find(producto => producto.Nombre === nombreProducto);
-  return producto;
-}
-
-// Función para buscar una clase de productos
-function buscarClase(claseProducto) {
-  let productosClase = resultados.filter(producto => producto.Clase === claseProducto);
-  return productosClase;
-}
-
+    // Llama a la función para mostrar los productos
+    //mostrarProductos(productos);
+    console.log(productos);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+});
