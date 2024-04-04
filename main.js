@@ -26,9 +26,15 @@ fetch(url)
         contenedor.innerHTML = '';
 
         // Filtra los productos por categoría si existe una categoría seleccionada
-        const categoriaSeleccionada = document.querySelector('.category-link.active');
-        const productosFiltrados = categoriaSeleccionada ? productos.filter(producto => producto.Clase === categoriaSeleccionada.textContent) : productos;
-
+        const categoriaSeleccionada = document.querySelector('.clase-link.active');
+        const subcategoriaSeleccionada = document.querySelector('.subclase-link.active');
+        let productosFiltrados = productos;
+        if (subcategoriaSeleccionada) {
+            productosFiltrados = productos.filter(producto => producto.Subclase === subcategoriaSeleccionada.textContent);
+        } else if (categoriaSeleccionada) {
+            productosFiltrados = productos.filter(producto => producto.Clase === categoriaSeleccionada.textContent);
+            console.log("productos filtrados: ", productosFiltrados)
+        }
         // Calcula el número de columnas según el tamaño de la pantalla
         const numColumnas = 3; // Mostrar tres imágenes por fila
 
@@ -43,6 +49,7 @@ fetch(url)
             const producto = productosFiltrados[i];
             const path = 'assets/Imagenes/' + producto.Ruta;
             const nombre = producto.Nombre;
+            console.log(producto)
 
             // Crea la tarjeta de producto
             const tarjeta = `
@@ -112,16 +119,17 @@ fetch(url)
     mostrarProductos(productos, 1); // Mostrar la primera página por defecto
 
     // Obtener los elementos de la lista de categorías
-    const categoryLinks = document.querySelectorAll('.category-link');
+    const claseLink = document.querySelectorAll('.clase-link');
+    const subclaseLink = document.querySelectorAll('.subclase-link');
 
     // Agregar event listener a cada elemento de la lista
-    categoryLinks.forEach(link => {
+    claseLink.forEach(link => {
         link.addEventListener('click', (event) => {
             // Evitar el comportamiento predeterminado del enlace
             event.preventDefault();
 
             // Eliminar la clase 'active' de todos los enlaces de categoría
-            categoryLinks.forEach(link => link.classList.remove('active'));
+            claseLink.forEach(link => link.classList.remove('active'));
 
             // Agregar la clase 'active' al enlace de categoría seleccionado
             link.classList.add('active');
@@ -130,6 +138,22 @@ fetch(url)
             mostrarProductos(productos, 1);
         });
     });
+    subclaseLink.forEach(link => {
+        link.addEventListener('click', (event) => {
+            // Evitar el comportamiento predeterminado del enlace
+            event.preventDefault();
+
+            // Eliminar la clase 'active' de todos los enlaces de subcategoría
+            subclaseLink.forEach(link => link.classList.remove('active'));
+
+            // Agregar la clase 'active' al enlace de subcategoría seleccionado
+            link.classList.add('active');
+
+            // Llamar a la función para mostrar los productos filtrados por la subcategoría seleccionada en la página 1
+            mostrarProductos(productos, 1);
+        });
+    });
+
   })
   .catch(error => {
     console.error('Error:', error);
