@@ -323,10 +323,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tienda.renderizarProductos(tienda.getProductos());
 
             // Event listener para el enlace de clase
-            const claseLink = document.querySelector('.clase-link');
-            claseLink.addEventListener('click', () => {
-                const filtro = claseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
-                tienda.renderizarProductos(tienda.getProductos(), filtro);
+            const claseLink = document.querySelectorAll('.clase-link');
+            claseLink.forEach(claseLink => {
+                claseLink.addEventListener('click', () => {
+                    const filtro = claseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+                    tienda.renderizarProductos(tienda.getProductos(), filtro);
+                });
             });
 
             // Event listener para los enlaces de subclase
