@@ -111,6 +111,7 @@ class Tienda {
     constructor() {
         this.productos = [];
         this.carritoDeCompras = new CarritoDeCompras();
+        this.rutaBaseImagenes = 'assets/Imagenes/'; // Ruta base para las imágenes
     }
 
     // Método para cargar productos desde un archivo CSV
@@ -126,7 +127,9 @@ class Tienda {
                 const lines = data.split('\n').slice(1);
                 this.productos = lines.map(line => {
                     const [nombre, clase, subclase, referenciaExterna, ruta] = line.split(',');
-                    return new Producto(nombre, clase, subclase, referenciaExterna, ruta);
+                    // Concatenar la ruta base de las imágenes con la ruta de la imagen del producto
+                    const imagen = this.rutaBaseImagenes + ruta;
+                    return new Producto(nombre, clase, subclase, referenciaExterna, imagen);
                 });
             })
             .catch(error => {
@@ -165,10 +168,10 @@ class Tienda {
                     productElement.innerHTML = `
                         <div style="display: flex; align-items: center;">
                             <div class="product-image" style="flex: 1;">
-                                <img src="assets/Imagenes/${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: 50px; max-width: 100%; max-height: 100%;">
+                                <img src="${producto.getImagen()}" alt="${producto.getNombre()}" style="width: 50px; height: 50px; max-width: 100%; max-height: 100%;">
                             </div>
                             <div class="product-name" style="flex: 2;">
-                                <p>${producto.nombre}</p>
+                                <p>${producto.getNombre()}</p>
                             </div>
                             <div class="product-quantity" style="flex: 1; display: flex; align-items: center; justify-content: space-between;">
                                 <button class="btn btn-sm btn-secondary decrease-quantity">-</button>
@@ -208,20 +211,19 @@ class Tienda {
         renderizarProductosEnCarrito();
         actualizarContador();
     }
-
     renderizarProductos(productos) {
         // Obtén el contenedor de productos
         const contenedor = document.querySelector('.col-lg-9');
-
+    
         // Limpia el contenedor
         contenedor.innerHTML = '';
-
+    
         // Calcula el número de columnas según el tamaño de la pantalla
         const numColumnas = 4; // Mostrar cuatro imágenes por fila
-
+    
         // Calcula el número total de páginas
         const numPaginas = Math.ceil(productos.length / 12);
-
+    
         // Determina la página actual
         let paginaActual = 1;
         const urlParams = new URLSearchParams(window.location.search);
@@ -229,50 +231,51 @@ class Tienda {
         if (!isNaN(pagina) && pagina > 0 && pagina <= numPaginas) {
             paginaActual = pagina;
         }
-
+    
         // Calcula el índice inicial y final de los productos para la página actual
         const inicio = (paginaActual - 1) * 12;
         const fin = Math.min(inicio + 12, productos.length);
-
+    
         // Recorre los productos para la página actual
         let fila = document.createElement('div');
         fila.classList.add('row', 'mb-4');
         for (let i = inicio; i < fin; i++) {
+            console.log(productos)
             const producto = productos[i];
             const path = producto.getImagen();
             const nombre = producto.getNombre();
-
+    
             // Crea la tarjeta de producto
             const tarjeta = `
-            <div class="col-md-${12 / numColumnas}">
-                <div class="card mb-4 product-wap rounded-0" style="width: 100%; height: 100%;">
-                    <div class="card rounded-0">
-                        <img class="card-img rounded-0 img-fluid" src="${path}" style="max-width: 100%; max-height: 200px; height: auto;">
-                        <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                            <ul class="list-unstyled">
-                                <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" onclick="addToCartAndRedirect(${JSON.stringify(producto)})"><i class="far fa-eye"></i></a></li>
-                                <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" onclick="addToCartAndRedirect(${JSON.stringify(producto)})"><i class="fas fa-cart-plus"></i></a></li>
+                <div class="col-md-${12 / numColumnas} mb-4"> <!-- Asegúrate de agregar la clase "mb-4" para crear un espacio entre las tarjetas -->
+                    <div class="card product-wap rounded-0" style="width: 100%; height: 100%;">
+                        <div class="card">
+                            <img class="card-img-top rounded-0 img-fluid" src="${path}" style="max-width: 100%; max-height: 200px; height: auto;">
+                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                <ul class="list-unstyled">
+                                    <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" onclick="addToCartAndRedirect(${JSON.stringify(producto)})"><i class="far fa-eye"></i></a></li>
+                                    <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" onclick="addToCartAndRedirect(${JSON.stringify(producto)})"><i class="fas fa-cart-plus"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a href="shop-single.html?image=${encodeURIComponent(path)}&name=${encodeURIComponent(nombre)}" class="h3 text-decoration-none">${nombre}</a>
+                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                <li class="pt-2">
+                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <a href="shop-single.html?image=${encodeURIComponent(path)}&name=${encodeURIComponent(nombre)}" class="h3 text-decoration-none">${nombre}</a>
-                        <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                            <li class="pt-2">
-                                <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-            </div>
-        `;
-        
+            `;
+    
             fila.innerHTML += tarjeta;
-
+    
             // Agrega la fila al contenedor cuando se llenen las columnas
             if ((i + 1 - inicio) % numColumnas === 0 || i === fin - 1) {
                 contenedor.appendChild(fila);
@@ -280,15 +283,15 @@ class Tienda {
                 fila.classList.add('row', 'mb-4');
             }
         }
-
+    
         // Implementa el cambio de página con los botones de navegación
         const prevPageButton = document.getElementById('prevPage');
         const nextPageButton = document.getElementById('nextPage');
-
+    
         // Habilita o deshabilita los botones de navegación según la página actual
         prevPageButton.disabled = paginaActual === 1;
         nextPageButton.disabled = paginaActual === numPaginas;
-
+    
         // Agrega los event listeners a los botones de navegación
         prevPageButton.addEventListener('click', () => {
             if (paginaActual > 1) {
@@ -296,7 +299,7 @@ class Tienda {
                 window.location.href = `shop.html?pagina=${nuevaPagina}`;
             }
         });
-
+    
         nextPageButton.addEventListener('click', () => {
             if (paginaActual < numPaginas) {
                 const nuevaPagina = paginaActual + 1;
@@ -304,7 +307,7 @@ class Tienda {
             }
         });
     }
-
+    
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -314,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const productoEjemplo = tienda.getProductoPorNombre('sept_prodEspecializados_03');
             if (productoEjemplo) {
                 tienda.carritoDeCompras.agregarProducto(productoEjemplo);
+                tienda.renderizarProductos(tienda.getProductos());
                 tienda.renderizarProductosEnCarritoYContador(tienda.getProductos());
             } else {
                 console.error('Producto no encontrado');
