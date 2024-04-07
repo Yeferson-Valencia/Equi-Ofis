@@ -211,12 +211,17 @@ class Tienda {
         renderizarProductosEnCarrito();
         actualizarContador();
     }
-    renderizarProductos(productos) {
+    renderizarProductos(productos, filtro = null) {
         // Obtén el contenedor de productos
         const contenedor = document.querySelector('.col-lg-9');
-    
+
         // Limpia el contenedor
         contenedor.innerHTML = '';
+
+        // Filtra los productos según el filtro si está definido
+        if (filtro) {
+            productos = productos.filter(producto => producto.clase === filtro || producto.subclase === filtro);
+        }
     
         // Calcula el número de columnas según el tamaño de la pantalla
         const numColumnas = 4; // Mostrar cuatro imágenes por fila
@@ -314,15 +319,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const tienda = new Tienda();
     tienda.cargarProductosDesdeCSV('productos.csv')
         .then(() => {
-            const productoEjemplo = tienda.getProductoPorNombre('sept_prodEspecializados_03');
-            if (productoEjemplo) {
-                tienda.carritoDeCompras.agregarProducto(productoEjemplo);
-                tienda.renderizarProductos(tienda.getProductos());
-                tienda.renderizarProductosEnCarritoYContador(tienda.getProductos());
-            } else {
-                console.error('Producto no encontrado');
-            }
-            tienda.renderizarProductosEnCarritoYContador();
+            // Resto del código sigue igual...
+            tienda.renderizarProductos(tienda.getProductos());
+
+            // Event listener para el enlace de clase
+            const claseLink = document.querySelector('.clase-link');
+            claseLink.addEventListener('click', () => {
+                const filtro = claseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+                tienda.renderizarProductos(tienda.getProductos(), filtro);
+            });
+
+            // Event listener para los enlaces de subclase
+            const subclaseLinks = document.querySelectorAll('.subclase-link');
+            subclaseLinks.forEach(subclaseLink => {
+                subclaseLink.addEventListener('click', () => {
+                    const filtro = subclaseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la subclase)
+                    tienda.renderizarProductos(tienda.getProductos(), filtro);
+                });
+            });
         })
         .catch(error => {
             console.error('Error al cargar los productos:', error);
