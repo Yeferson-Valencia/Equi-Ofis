@@ -17,13 +17,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <!--
-    
-TemplateMo 559 Equi-Ofis
-
-https://templatemo.com/tm-559-Equi-Ofis-shop
-
--->
+    <!-- scrpts-->
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -58,7 +53,6 @@ https://templatemo.com/tm-559-Equi-Ofis-shop
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
                 Equi-Ofis
             </a>
@@ -84,15 +78,17 @@ https://templatemo.com/tm-559-Equi-Ofis-shop
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                    </div>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+
+                <div class="navbar align-self-center d-flex flex-column position-relative">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3"></div>
+                    <a class="nav-icon position-relative text-decoration-none" href="#" id="carrito-icon">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span id="cart-counter" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                        <span id="cart-counter"
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
                     </a>
-                    <script src="main-car_shop.js"></script>
-                </div>  
+                    <div class="text-decoration-none car-products navbar navbar-expand-lg navbar-light shadow position-absolute">
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

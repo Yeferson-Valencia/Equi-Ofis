@@ -20,6 +20,8 @@
     <!-- Load map styles -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
+    <!-- Scripts -->
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -54,7 +56,6 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
                 Equi-Ofis
             </a>
@@ -80,17 +81,18 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                    </div>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span id="cart-counter" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
-                    </a>
-                    <script src="main-car_shop.js"></script>
-                </div>  
-            </div>
 
+                <div class="navbar align-self-center d-flex flex-column position-relative">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3"></div>
+                    <a class="nav-icon position-relative text-decoration-none" href="#" id="carrito-icon">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span id="cart-counter"
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                    </a>
+                    <div class="text-decoration-none car-products navbar navbar-expand-lg navbar-light shadow position-absolute">
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
     <!-- Close Header -->
