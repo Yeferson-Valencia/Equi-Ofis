@@ -2,7 +2,7 @@
 import { CarritoDeCompras } from './Carro-Compras.js';
 
 export class Producto {
-    constructor(nombre, clase, subclase, referenciaExterna, ruta, cantidad = 0) {
+    constructor(nombre, clase, subclase, referenciaExterna, ruta, cantidad = 1) {
         this.nombre = nombre;
         this.clase = clase;
         this.subclase = subclase;
@@ -207,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //renderizar los productos en el carrito y actualizar el contador
             tienda.carritoDeCompras.cargarProductosDelAlmacenamientoLocal();
-
             tienda.carritoDeCompras.renderizarProductosEnCarritoYContador();
 
             // Renderizar los productos en la página inicial
@@ -252,9 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.preventDefault();
                     const indiceProducto = this.getAttribute('data-producto');
                     const productoSeleccionado = productosFiltrados[indiceProducto];
-                    
                     tienda.carritoDeCompras.agregarProducto(productoSeleccionado)
-                    console.log(productoSeleccionado)
                     tienda.carritoDeCompras.renderizarProductosEnCarritoYContador();
                 });
             });

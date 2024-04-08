@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Decodificar la información del producto desde formato JSON
     const productoJSON = JSON.parse(decodeURIComponent(productoString));
-    const { nombre, clase, subclase, referenciaExterna, imagen } = productoJSON;
-    console.log(productoJSON);
-    const producto = new Producto(nombre, clase, subclase, referenciaExterna, imagen);
+    const { nombre, clase, subclase, referenciaExterna, imagen, cantidad } = productoJSON;
+    console.log(productoJSON)
+    const producto = new Producto(nombre, clase, subclase, referenciaExterna, imagen, cantidad);
     
     // Seleccionar los elementos del DOM donde quieres mostrar la información del producto
     const imagenProducto = document.querySelector('#product-detail');
@@ -51,13 +51,47 @@ document.addEventListener('DOMContentLoaded', () => {
     function actualizarCantidad() {
         varValue.textContent = producto.cantidad;
         cantidadProducto.value = producto.cantidad;
-        btnMinus.disabled = producto.cantidad === 0; // Deshabilitar botón de menos cuando la cantidad es cero
+
+        const productoEnCarrito = carrito.getProductoPorNombre(producto.nombre);
+        if (productoEnCarrito !== null) {
+            const cantidadEnCarrito = productoEnCarrito.cantidad;
+            if (cantidadEnCarrito > 0) {
+                btnMinus.disabled = false; // Habilitar botón de menos si la cantidad en el carrito es mayor a cero
+            } else {
+                if (parseInt(varValue.textContent) === 0) {
+                    btnMinus.disabled = true; // Deshabilitar botón de menos si la cantidad en el carrito es cero pero para valores negativos
+                } else {
+                    btnMinus.disabled = false; // Habilitar botón de menos si la cantidad en el carrito es cero
+                }
+            }
+
+            if (-cantidadEnCarrito === parseInt(varValue.textContent)) {
+                btnMinus.disabled = true; // Deshabilitar botón de menos si la cantidad en el carrito es igual a la cantidad del producto en negativo
+            }
+        } else {
+            console.log('No hay productos en el carrito');
+        }
     }
 
+    
     // Llamar a la función para inicializar la cantidad
     actualizarCantidad();
 
     //Agregar producto al carrito 
 
-    const btnAgregarAlCarrito = document.getElementById('btn-add-to-cart');
+    const btnCompras  = document.getElementById('btnCompras');
+    btnCompras.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (producto.cantidad === 0) {
+            producto.cantidad = 1;
+            carrito.agregarProducto(producto);
+            carrito.renderizarProductosEnCarritoYContador();
+            actualizarCantidad();
+        }else{
+            carrito.agregarProducto(producto);
+            carrito.renderizarProductosEnCarritoYContador();
+            producto.cantidad = carrito.getProductoPorNombre(producto.nombre).cantidad;
+            actualizarCantidad();
+        }
+    });
 });

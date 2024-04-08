@@ -15,7 +15,7 @@ export class CarritoDeCompras {
         const index = this.productos.findIndex(p => p.nombre === producto.nombre);
 
         if (index !== -1) {
-            this.productos[index].cantidad++;
+            this.productos[index].cantidad+=producto.cantidad;
         } else {
             const nuevoProducto = new Producto(
                 producto.nombre,
@@ -23,7 +23,7 @@ export class CarritoDeCompras {
                 producto.subclase,
                 producto.referenciaExterna,
                 producto.imagen,
-                1
+                producto.cantidad,
             );
             this.productos.push(nuevoProducto);
             this.guardarProductos();
@@ -52,6 +52,8 @@ export class CarritoDeCompras {
     guardarProductos() {
         localStorage.setItem('productos', JSON.stringify(this.productos));
     }
+
+    //Actualizar la cantidad de productos en el carrito del local storage
 
     quitarProducto(producto) {
         if (!producto) {
@@ -83,6 +85,20 @@ export class CarritoDeCompras {
         }
         return this.productos.reduce((total, producto) => total + producto.cantidad, 0);
     }
+
+    getProductoPorNombre(nombre) {
+        if (!nombre) {
+            console.log('No se pasó un nombre de producto para buscar en el carrito');
+            return null;
+        } else if (this.productos.length === 0) {
+            console.log('No hay productos en el carrito');
+            return null;
+        } else {
+            const productoEncontrado = this.productos.find(producto => producto.nombre === nombre);
+            return productoEncontrado ? productoEncontrado : null;
+        }
+    }
+    
 
     // Método para renderizar los productos en el carrito y actualizar el contador
     renderizarProductosEnCarritoYContador() {
