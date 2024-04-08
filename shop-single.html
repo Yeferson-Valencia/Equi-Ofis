@@ -22,7 +22,8 @@
     <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
 
     <!-- scrpts-->
-    <script type="module" src="Shop-single.js"></script></head>
+    <script type="module" src="Shop-single.js"></script>
+</head>
 
 <body>
     <!-- Start Top Nav -->
@@ -130,30 +131,29 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 class="h2" id="product-name"></h1>
-                            <h6>Description:</h6>
-                            <p>Para mas información.....</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h6>Avaliable Color :</h6>
+                                    <h6>Colores disponibles :</h6>
                                 </li>
                                 <li class="list-inline-item">
                                     <p class="text-muted"><strong>Todos los colores</strong></p>
                                 </li>
                             </ul>
                             <form action="" method="GET">
-                                <input type="hidden" name="product-title" value="Activewear">
+                                <input type="hidden" name="product-title" value="">
                                 <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
                                                 Quantity
-                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                                <input type="hidden" name="product-quanity" id="product-quanity" value="">
                                             </li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                            <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-minus">-</button></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value"></span></li>
+                                            <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-plus">+</button></li>
                                         </ul>
                                     </div>
+                                    
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
