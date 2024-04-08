@@ -197,6 +197,9 @@ export class Tienda {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    if(window.location.pathname === '/shop.html') {
+
     const tienda = new Tienda();
 
     // Cargar productos desde el archivo CSV al cargar la página
@@ -259,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error al cargar los productos:', error);
-        });
+        }); 
+    }
 });
 
