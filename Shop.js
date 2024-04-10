@@ -39,6 +39,8 @@ export class Producto {
         return this.imagen;
     }
 
+
+
     // Método para actualizar los atributos del producto
     setProducto(nombre, clase, subclase, referenciaExterna, ruta, cantidad) {
         this.nombre = nombre;

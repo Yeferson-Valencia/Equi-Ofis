@@ -23,6 +23,7 @@
 
     <!-- scrpts-->
     <script type="module" src="Shop-single.js"></script>
+
 </head>
 
 <body>
@@ -157,10 +158,11 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg product-detail-add-to-cart" name="submit" value="buy">Buy</button>
+                                        <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart" name="submit" value="buy" id="whatsappButton">Buy <i class="fab fa-whatsapp"></i></button>
+                                        <link rel="stylesheet"   crossorigin="anonymous" referrerpolicy="no-referrer" />
                                     </div>
                                     <div class="col d-grid">
-                                        <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart" id="btnCompras">Add To Cart</button>
+                                        <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart" id="btnCompras">Agregar Producto</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,52 +176,28 @@
     <!-- Close Content -->
 
     <!-- Start Article -->
-    <section class="py-5">
+    <!-- <section class="py-5">
         <div class="container">
             <div class="row text-left p-2 pb-3">
-                <h4>Related Products</h4>
+                <h4>Productos Relacionados</h4>
             </div>
-            <!--Start Carousel Wrapper-->
-            <div id="carousel-related-product">
-                <div class="p-2 pb-3">
-                    <div class="product-wap card rounded-0">
-                        <div class="card rounded-0">
-                            <img class="card-img rounded-0 img-fluid" src="assets/img/shop_08.jpg">
-                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                <ul class="list-unstyled">
-                                    <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <a href="shop-single.html" class="h3 text-decoration-none">Red Clothing</a>
-                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li>M/L/X/XL</li>
-                                <li class="pt-2">
-                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="text-center mb-0">$20.00</p>
-                        </div>
-                    </div>
+            Start Carousel Wrapper
+            <div id="carousel-related-product" class="carousel">
+                <div class="carousel-inner">
+                    Aquí se insertarán todas las imágenes relacionadas 
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-related-product" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-related-product" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>            
         </div>
-    </section>
+    </section> -->
+    
     <!-- End Article -->
 
 
@@ -308,41 +286,6 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
-
-    <!-- Start Slider Script -->
-    <script src="assets/js/slick.min.js"></script>
-    <script>
-        $('#carousel-related-product').slick({
-            infinite: true,
-            arrows: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
-            dots: true,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                }
-            ]
-        });
-    </script>
-    <!-- End Slider Script -->
 
 </body>
 

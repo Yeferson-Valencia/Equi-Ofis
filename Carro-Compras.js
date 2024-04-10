@@ -80,11 +80,18 @@ export class CarritoDeCompras {
     }
 
     getCantidadTotal() {
-        if (this.productos.length === 0) {
-            return 0;
-        }
-        return this.productos.reduce((total, producto) => total + producto.cantidad, 0);
+        // Inicializar la cantidad total en 0
+        let cantidadTotal = 0;
+    
+        // Recorrer la matriz de productos y sumar las cantidades de cada producto
+        this.productos.forEach(producto => {
+            cantidadTotal += producto.cantidad;
+        });
+    
+        // Retornar la cantidad total calculada
+        return cantidadTotal;
     }
+    
 
     getProductoPorNombre(nombre) {
         if (!nombre) {
