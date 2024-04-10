@@ -39,17 +39,6 @@ export class Producto {
         return this.imagen;
     }
 
-
-
-    // Método para actualizar los atributos del producto
-    setProducto(nombre, clase, subclase, referenciaExterna, ruta, cantidad) {
-        this.nombre = nombre;
-        this.clase = clase;
-        this.subclase = subclase;
-        this.referenciaExterna = referenciaExterna;
-        this.imagen = ruta;
-        this.cantidad = cantidad;
-    }
 }
 
 export class Tienda {
@@ -62,7 +51,106 @@ export class Tienda {
         this.filtroActual = null;
     }
 
+    // Método para manejar los eventos
+    manejarEventos() {
+        // Agregar eventos a los enlaces de clase y subclase
+        const claseLinks = document.querySelectorAll('.clase-link');
+        const subclaseLinks = document.querySelectorAll('.subclase-link');
+        this.eventoFiltrarProductos(claseLinks);
+        this.eventoFiltrarProductos(subclaseLinks);
+
+        // Agregar evento al botón de avanzar página y retroceder la página
+        const nextPageButton = document.getElementById('nextPage');
+        const prevPageButton = document.getElementById('prevPage');
+        this.eventoAvanzarPagina(nextPageButton);
+        this.eventoRetrocederPagina(prevPageButton);
+
+    }
+
+    // Método para agregar eventos a los enlaces de filtro
+    eventoFiltrarProductos(claseLinks) {
+        claseLinks.forEach(claseLink => {
+            claseLink.addEventListener('click', () => {
+                const filtro = claseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+                this.aplicarFiltro(filtro);
+            });
+        });
+    }
+
+    // Método para agregar evento al botón de avanzar página
+    eventoAvanzarPagina(nextPageButton) {
+        nextPageButton.addEventListener('click', () => {
+            this.avanzarPagina();
+        });
+    }
+
+    // Método para agregar evento al botón de retroceder página
+    eventoRetrocederPagina(prevPageButton) {
+        prevPageButton.addEventListener('click', () => {
+            this.retrocederPagina();
+        });
+    }
+
+    // Método para agregar evento a los productos filtrados
+    eventoProductosFiltrados() {
+        document.querySelectorAll('.image-gallery-add-to-cart').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const indiceProducto = button.getAttribute('data-producto');
+                const productosFiltrados = this.filtrarProductos(this.filtroActual);
+                const productoSeleccionado = productosFiltrados[indiceProducto];
+                this.carritoDeCompras.agregarProducto(productoSeleccionado);
+                this.carritoDeCompras.renderizarProductosEnCarritoYContador();
+            });
+        });
+    }
+
+    // Método para cargar productos y eventos
+    cargarProductosYEventos() {
+        // Renderizar los productos en el carrito y actualizar el contador
+        this.carritoDeCompras.cargarProductosDelAlmacenamientoLocal();
+        this.carritoDeCompras.renderizarProductosEnCarritoYContador();
+
+        // Renderizar los productos en la página inicial
+        this.renderizarProductosEnPagina(1);
+
+        // Manejar eventos
+        this.manejarEventos();
+    }
+
+    // Método para aplicar el filtro
+    aplicarFiltro(filtro) {
+        this.filtroActual = filtro;
+        this.renderizarProductosEnPagina(1, filtro);
+    }
+
+    // Método para avanzar a la siguiente página
+    avanzarPagina() {
+        const cantidadTotalPaginas = this.getCantidadTotalPaginas(this.filtroActual);
+        if (this.paginaActual < cantidadTotalPaginas) {
+            this.paginaActual++;
+            this.renderizarProductosEnPagina(this.paginaActual, this.filtroActual);
+        }
+    }
     
+    // Método para retroceder a la página anterior
+    retrocederPagina() {
+        if (this.paginaActual > 1) {
+            this.paginaActual--;
+            this.renderizarProductosEnPagina(this.paginaActual, this.filtroActual);
+        }
+    }
+
+    // Método para obtener un producto por su nombre
+    getProductoPorNombre(nombre) {
+        return this.productos.find(producto => producto.nombre === nombre);
+    }
+
+    // Método para obtener la cantidad total de páginas según el filtro
+    getCantidadTotalPaginas(filtro) {
+        const productosFiltrados = this.filtrarProductos(filtro);
+        return Math.ceil(productosFiltrados.length / this.productosPorPagina);
+    }
 
     // Método para cargar productos desde un archivo CSV
     cargarProductosDesdeCSV(url) {
@@ -87,33 +175,8 @@ export class Tienda {
             });
     }
 
-    // Método para obtener todos los productos
-    getProductos() {
-        return this.productos;
-    }
-
-    // Método para obtener un producto por su nombre
-    getProductoPorNombre(nombre) {
-        return this.productos.find(producto => producto.nombre === nombre);
-    }
-
-    // Método para obtener la cantidad total de páginas según el filtro
-    getCantidadTotalPaginas(filtro) {
-        const productosFiltrados = this.filtrarProductos(filtro);
-        return Math.ceil(productosFiltrados.length / this.productosPorPagina);
-    }
-
-    // Método para obtener los productos filtrados
-    filtrarProductos(filtro) {
-        if (!filtro) {
-            return this.productos;
-        }
-        return this.productos.filter(producto => producto.clase === filtro || producto.subclase === filtro);
-    }
-
     // Método para renderizar los productos en la página
     renderizarProductosEnPagina(pagina, filtro = null) {
-
         const contenedor = document.querySelector('.col-lg-9');
         contenedor.innerHTML = '';
 
@@ -140,7 +203,8 @@ export class Tienda {
                         <img class="card-img-top rounded-0 img-fluid" src="${path}" style="max-width: 100%; max-height: 200px; height: auto;">
                         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                             <ul class="list-unstyled">
-                            <li><a href="shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}" class="btn btn-success text-white mt-2 image-gallery-view"><i class="far fa-eye"></i></a></li>                                <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" data-producto="${i}"><i class="fas fa-cart-plus"></i></a></li>
+                                <li><a href="shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}" class="btn btn-success text-white mt-2 image-gallery-view"><i class="far fa-eye"></i></a></li>                                
+                                <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" data-producto="${i}"><i class="fas fa-cart-plus"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -170,97 +234,33 @@ export class Tienda {
             }
         }
 
+        // Agregar eventos para los productos filtrados
+        this.eventoProductosFiltrados();
     }
 
-    // Método para aplicar el filtro
-    aplicarFiltro(filtro) {
-        this.filtroActual = filtro;
-        this.renderizarProductosEnPagina(1, filtro);
-    }
-
-    // Método para avanzar a la siguiente página
-    avanzarPagina() {
-        const cantidadTotalPaginas = this.getCantidadTotalPaginas(this.filtroActual);
-        if (this.paginaActual < cantidadTotalPaginas) {
-            this.paginaActual++;
-            this.renderizarProductosEnPagina(this.paginaActual, this.filtroActual);
+    // Método para obtener los productos filtrados
+    filtrarProductos(filtro) {
+        if (!filtro) {
+            return this.productos;
         }
+        return this.productos.filter(producto => producto.clase === filtro || producto.subclase === filtro);
     }
 
-    // Método para retroceder a la página anterior
-    retrocederPagina() {
-        if (this.paginaActual > 1) {
-            this.paginaActual--;
-            this.renderizarProductosEnPagina(this.paginaActual, this.filtroActual);
-        }
-    }
+
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    if(window.location.host === 'yeferson-valencia.github.io' && window.location.pathname === '/Equi-Ofis/shop.html') {
-
-    const tienda = new Tienda();
-
-    // Cargar productos desde el archivo CSV al cargar la página
-    tienda.cargarProductosDesdeCSV('productos.csv')
-        .then(() => {
-
-            //renderizar los productos en el carrito y actualizar el contador
-            tienda.carritoDeCompras.cargarProductosDelAlmacenamientoLocal();
-            tienda.carritoDeCompras.renderizarProductosEnCarritoYContador();
-
-            // Renderizar los productos en la página inicial
-            tienda.renderizarProductosEnPagina(1);
-
-            // Event listener para los enlaces de clase
-            const claseLinks = document.querySelectorAll('.clase-link');
-            claseLinks.forEach(claseLink => {
-                claseLink.addEventListener('click', () => {
-                    const filtro = claseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
-                    tienda.aplicarFiltro(filtro);
-                });
-            });
-
-            // Event listener para los enlaces de subclase
-            const subclaseLinks = document.querySelectorAll('.subclase-link');
-            subclaseLinks.forEach(subclaseLink => {
-                subclaseLink.addEventListener('click', () => {
-                    const filtro = subclaseLink.textContent.trim(); // Obtener el valor del filtro (nombre de la subclase)
-                    tienda.aplicarFiltro(filtro);
-                });
-            });
-
-            // Event listener para el botón de avanzar página
-            const nextPageButton = document.getElementById('nextPage');
-            nextPageButton.addEventListener('click', () => {
-                tienda.avanzarPagina();
-                tienda.carritoDeCompras.renderizarProductosEnCarritoYContador()
-            });
-
-            // Event listener para el botón de retroceder página
-            const prevPageButton = document.getElementById('prevPage');
-            prevPageButton.addEventListener('click', () => {
-                tienda.retrocederPagina();
+    if (window.location.host === 'yeferson-valencia.github.io' || window.location.pathname.endsWith('/shop.html')) {
+        const tienda = new Tienda();
+        tienda.cargarProductosDesdeCSV('productos.csv')
+            .then(() => {
+                tienda.cargarProductosYEventos();
                 tienda.carritoDeCompras.renderizarProductosEnCarritoYContador()
 
+            })
+            .catch(error => {
+                console.error('Error al cargar los productos:', error);
             });
-
-            const productosFiltrados = tienda.filtrarProductos(tienda.filtroActual);
-            document.querySelectorAll('.image-gallery-add-to-cart').forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const indiceProducto = this.getAttribute('data-producto');
-                    const productoSeleccionado = productosFiltrados[indiceProducto];
-                    tienda.carritoDeCompras.agregarProducto(productoSeleccionado)
-                    tienda.carritoDeCompras.renderizarProductosEnCarritoYContador();
-                });
-            });
-        })
-        .catch(error => {
-            console.error('Error al cargar los productos:', error);
-        }); 
     }
 });
 
