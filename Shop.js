@@ -197,7 +197,7 @@ export class Tienda {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    if(window.location.pathname === '/shop.html') {
+    if(window.location.host === 'yeferson-valencia.github.io' && window.location.pathname === '/Equi-Ofis/shop.html') {
 
     const tienda = new Tienda();
 
