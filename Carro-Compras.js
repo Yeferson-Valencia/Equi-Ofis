@@ -110,6 +110,19 @@ export class CarritoDeCompras {
             return productoEncontrado ? productoEncontrado : null;
         }
     }
+
+    getProductoPorImagen(imagen){
+        if (!imagen) {
+            console.log('No se pasó un nombre de producto para buscar en el carrito');
+            return null;
+        } else if (this.productos.length === 0) {
+            console.log('No hay productos en el carrito');
+            return null;
+        } else {
+            const productoEncontrado = this.productos.find(producto => producto.imagen === imagen);
+            return productoEncontrado ? productoEncontrado : null;
+        }
+    }
     
 
     // Método para renderizar los productos en el carrito y actualizar el contador

@@ -250,7 +250,7 @@ export class Tienda {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.host === 'yeferson-valencia.github.io' || window.location.pathname.endsWith('/shop.html')) {
+    if (window.location.pathname.endsWith('/shop.html')) {
         const tienda = new Tienda();
         tienda.cargarProductosDesdeCSV('productos.csv')
             .then(() => {
