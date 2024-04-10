@@ -52,17 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tituloProducto = document.createElement('a');
                 tituloProducto.href = `shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;
                 tituloProducto.classList.add('h2', 'text-decoration-none', 'text-dark');
-                tituloProducto.textContent = 'Nuevos diseños y colores';
+                tituloProducto.textContent = producto.nombre;
 
                 // Crear el texto de la tarjeta
                 const textoTarjeta = document.createElement('p');
-                textoTarjeta.classList.add('card-text');
-                textoTarjeta.textContent = 'El mas vendido';
+                // textoTarjeta.classList.add('card-text');
+                // textoTarjeta.textContent = 'Los mas vendidos';
 
                 // Crear el texto de reviews
                 const textoReviews = document.createElement('p');
                 textoReviews.classList.add('text-muted');
-                textoReviews.textContent = `Prodia interesarte`;
+                textoReviews.textContent = `Los mas vendidos`;
 
                 // Añadir los elementos al cuerpo de la tarjeta
                 cuerpoTarjeta.appendChild(tituloProducto);
