@@ -71,13 +71,13 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" href="about.html">Acerca de nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
+                            <a class="nav-link" href="shop.html">Tienda</a>
                         </li>
                     </ul>
                 </div>
@@ -107,7 +107,7 @@
                 <div class="row">
                     <!-- Sección del mapa -->
                     <div class="col-md-6">
-                        <h3 class="h2 text-success border-bottom pb-3 border-light text-center">Encuéntranos aquí</h3>
+                        <h3 class="h2 border-bottom pb-3 border-light text-center text-light">Encuéntranos aquí</h3>
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1453081460645!2d-73.12492861465859!3d7.109153774572862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e683fc4e1e8d437%3A0xc2ac2217608ecaa5!2sMuebles%20Equi-Ofis!5e0!3m2!1ses!2sco!4v1711830797775!5m2!1ses!2sco" 
                                 width="100%" 
                                 height="450" 
@@ -119,18 +119,18 @@
                     </div>
                     <!-- Sección del formulario -->
                     <div class="col-md-6">
-                        <h3 class="h2 text-success border-bottom pb-3 border-light text-center">Contáctanos</h3>
+                        <h3 class="h2 border-bottom pb-3 border-light text-center text-light">Contáctanos</h3>
                         <form action="contact.php" method="post">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nombre</label>
+                                <label for="name" class="form-label text-light">Nombre</label>
                                 <input type="text" class="form-control" id="name" name="name" required placeholder="Monica Santander">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Correo</label>
+                                <label for="email" class="form-label text-light">Correo</label>
                                 <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com">
                             </div>
                             <div class="mb-3">
-                                <label for="message" class="form-label">Mensaje</label>
+                                <label for="message" class="form-label text-light">Mensaje</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
@@ -143,9 +143,10 @@
     
     <style>
         .gradient-background {
-            background-image: linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('assets/Imagenes/Dr-Ofis.jpeg');
-            background-size: cover;
+            background-image: linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('assets/Imagenes/Dr-Ofis3.jpeg');
+            background-size: auto;
             background-position: center;
+            opacity: 1;
         }
     
         .container {
@@ -153,10 +154,7 @@
             z-index: 1; /* Asegura que el contenido esté por encima del fondo */
         }
     
-        /* Modifica la transparencia de la imagen */
-        .container img {
-            opacity: 0.1;
-        }
+
     </style>
     
 

@@ -125,51 +125,67 @@ export class CarritoDeCompras {
     }
     
 
-    // Método para renderizar los productos en el carrito y actualizar el contador
     renderizarProductosEnCarrito() {
         const carProductsList = document.querySelector('.car-products');
         if (this.getProductos().length > 0) {
             carProductsList.innerHTML = '';
-            this.getProductos().forEach(producto => {
-                const productElement = document.createElement('div');
-                productElement.classList.add('car-product');
-                productElement.innerHTML = `
-                    <div style="display: flex; align-items: center;">
-                        <div class="product-image" style="flex: 1;">
-                            <img src="${producto.getImagen()}" alt="${producto.getNombre()}" style="width: 50px; height: 50px; max-width: 100%; max-height: 100%;">
+            this.getProductos().forEach((producto, index) => {
+                if (index < 5) { // Limitar a mostrar solo los primeros cinco productos
+                    const productElement = document.createElement('div');
+                    productElement.classList.add('car-product');
+                    productElement.innerHTML = `
+                        <div class="product-container" style="display: flex; align-items: center;">
+                            <div class="product-image" style="flex: 1; margin-left: 10px;"> <!-- Agregar margen izquierdo -->
+                                <img src="${producto.getImagen()}" alt="${producto.getNombre()}" style="width: 50px; height: 50px; max-width: 100%; max-height: 100%;">
+                            </div>
+                            <div class="product-details" style="flex: 2;">
+                                <p class="product-name" style="text-align: center;">${producto.getNombre()}</p>
+                            </div>
+                            <div class="product-quantity" style="flex: 1; display: flex; align-items: center; justify-content: flex-end;">
+                                <button class="btn btn-sm btn-secondary decrease-quantity">-</button>
+                                <span>${producto.cantidad}</span>
+                                <button class="btn btn-sm btn-primary increase-quantity">+</button>
+                            </div>
                         </div>
-                        <div class="product-name" style="flex: 2;">
-                            <p>${producto.getNombre()}</p>
-                        </div>
-                        <div class="product-quantity" style="flex: 1; display: flex; align-items: center; justify-content: space-between;">
-                            <button class="btn btn-sm btn-secondary decrease-quantity">-</button>
-                            <span>${producto.cantidad}</span>
-                            <button class="btn btn-sm btn-primary increase-quantity">+</button>
-                        </div>
-                    </div>
-                `;
-                carProductsList.appendChild(productElement);
-
-                const decreaseBtn = productElement.querySelector('.decrease-quantity');
-                const increaseBtn = productElement.querySelector('.increase-quantity');
-                const quantitySpan = productElement.querySelector('.product-quantity span');
-
-                decreaseBtn.addEventListener('click', () => {
-                    this.quitarProducto(producto);
-                    this.renderizarProductosEnCarrito();
-                    this.actualizarContador();
-                });
-
-                increaseBtn.addEventListener('click', () => {
-                    producto.cantidad++;
-                    quantitySpan.textContent = producto.cantidad;
-                    this.actualizarContador();
-                });
+                    `;
+                    carProductsList.appendChild(productElement);
+    
+                    const decreaseBtn = productElement.querySelector('.decrease-quantity');
+                    const increaseBtn = productElement.querySelector('.increase-quantity');
+                    const quantitySpan = productElement.querySelector('.product-quantity span');
+    
+                    decreaseBtn.addEventListener('click', () => {
+                        this.quitarProducto(producto);
+                        this.renderizarProductosEnCarrito();
+                        this.actualizarContador();
+                    });
+    
+                    increaseBtn.addEventListener('click', () => {
+                        producto.cantidad++;
+                        quantitySpan.textContent = producto.cantidad;
+                        this.actualizarContador();
+                    });
+                }
             });
+    
+            // Agregar scroll si hay más de cinco productos
+            if (this.getProductos().length > 5) {
+                carProductsList.style.overflowY = 'scroll';
+                carProductsList.style.maxHeight = '250px'; // Ajustar la altura máxima según tus necesidades
+            } else {
+                carProductsList.style.overflowY = 'auto';
+                carProductsList.style.maxHeight = 'none';
+            }
         } else {
             carProductsList.innerHTML = '<p class="text-center">No hay artículos</p>';
         }
     }
+    
+    
+    
+    
+    
+    
 
     // Método para renderizar el contador del carrito
     renderizarContador() {
