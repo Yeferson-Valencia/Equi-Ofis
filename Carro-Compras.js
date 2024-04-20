@@ -1,5 +1,5 @@
 // Importar de Shop la clase Producto
-import { Producto } from './Shop.js';
+import { Producto, Tienda } from './Shop.js';
 
 export class CarritoDeCompras {
     constructor() {
@@ -182,11 +182,6 @@ export class CarritoDeCompras {
     }
     
     
-    
-    
-    
-    
-
     // Método para renderizar el contador del carrito
     renderizarContador() {
         const carritoCounter = document.getElementById('cart-counter');
@@ -195,17 +190,46 @@ export class CarritoDeCompras {
     }
 
     // Método para renderizar productos en el carrito y actualizar el contador
+    // Método para renderizar productos en el carrito y actualizar el contador
     renderizarProductosEnCarritoYContador() {
-        const carritoIcon = document.getElementById('carrito-icon');
-
-        carritoIcon.addEventListener('click', event => {
-            event.preventDefault();
-            document.querySelector('.car-products').classList.toggle('active');
-        });
-
         this.renderizarProductosEnCarrito();
         this.renderizarContador();
         this.guardarProductos();
+        this.actualizarEstadoCarritoIcon();
+    }
+    
+    actualizarEstadoCarritoIcon() {
+        const carritoIcon = document.getElementById('carrito-icon');
+        // Suponiendo que tienes una función que devuelve la cantidad de productos en el carrito
+        const cantidadProductos = this.getProductos().length;
+    
+        if (cantidadProductos > 0) {
+            carritoIcon.disabled = false; // Habilita el botón si hay productos
+        } else {
+            carritoIcon.disabled = true; // Deshabilita el botón si el carrito está vacío
+        }
     }
 
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const carritoIcon = document.getElementById('carrito-icon');
+    
+    carritoIcon.addEventListener('click', event => {
+        event.preventDefault();
+        document.querySelector('.car-products').classList.toggle('active');
+    });
+
+    // Asumiendo que tienes una instancia de tu clase de manejo del carrito llamada `miCarrito`
+    if (window.location.pathname.endsWith('/shop.html')) {
+        const tienda = new Tienda();
+        tienda.cargarProductosDesdeCSV('productos.csv')
+            .then(() => {
+                tienda.cargarProductosYEventos();
+                tienda.carritoDeCompras.renderizarProductosEnCarritoYContador();
+            })
+            .catch(error => {
+                console.error('Error al cargar los productos:', error);
+            });
+    }
+});

@@ -95,12 +95,12 @@ export class Tienda {
     eventoProductosFiltrados() {
         document.querySelectorAll('.image-gallery-add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                event.preventDefault();
                 const indiceProducto = button.getAttribute('data-producto');
                 const productosFiltrados = this.filtrarProductos(this.filtroActual);
                 const productoSeleccionado = productosFiltrados[indiceProducto];
                 this.carritoDeCompras.agregarProducto(productoSeleccionado);
                 this.carritoDeCompras.renderizarProductosEnCarritoYContador();
+                event.preventDefault();
             });
         });
     }
