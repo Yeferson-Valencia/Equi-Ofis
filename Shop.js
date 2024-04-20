@@ -200,7 +200,7 @@ export class Tienda {
             <div class="col-md-${12 / numColumnas} mb-4"> <!-- Asegúrate de agregar la clase "mb-4" para crear un espacio entre las tarjetas -->
                 <div class="card product-wap rounded-0" style="width: 100%; height: 100%;">
                     <div class="card">
-                        <img class="card-img-top rounded-0 img-fluid" src="${path}" style="max-width: 100%; max-height: 200px; height: auto;">
+                        <img class="card-img-top rounded-0 img-fluid" src="${path}">
                         <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                             <ul class="list-unstyled">
                                 <li><a href="shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}" class="btn btn-success text-white mt-2 image-gallery-view"><i class="far fa-eye"></i></a></li>                                

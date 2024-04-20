@@ -206,6 +206,12 @@ body, ul, li, p, a, label, input, div {
   height: 6px;
 }
 
+.card-img-top {
+  object-fit: cover; /* O usa 'contain' según prefieras */
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Establece una altura fija para mantener la relación de aspecto */
+}
+
 
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important; background: white;}
