@@ -65,8 +65,8 @@ body, ul, li, p, a, label, input, div {
 .bg-black { background-color: #1d242d !important;}
 .bg-success { background-color: #59ab6e !important;}
 .btn-success {
-  background-color: #FFD700 !important; /* Amarillo */
-  border-color: #FFD700 !important; /* Amarillo */
+  background-color: #FF0000 !important; /* Amarillo */
+  border-color: #000000 !important; /* Amarillo */
 }
 
 
