@@ -123,12 +123,59 @@ export class CarritoDeCompras {
             return productoEncontrado ? productoEncontrado : null;
         }
     }
-    
+
+    enviarProductosPorWhatsApp() {
+        const whatsappButton = document.getElementById('boton-whatsapp');
+
+        whatsappButton.addEventListener('click', () => {
+            // Obtener la cantidad total de productos en el carrito
+            const cantidadTotal = this.getCantidadTotal(); // Utiliza la instancia del carrito pasada al constructor
+
+            // Comprobar si hay productos en el carrito
+            if (cantidadTotal === 0) {
+                alert('No hay productos en el carrito.');
+                return; // Salir de la función si no hay productos en el carrito
+            }
+
+            let mensaje = "Hola, me gustaría conocer más detalles sobre estos productos:\n\n";
+
+            // Agregar cada producto al mensaje
+            this.productos.forEach(producto => {
+                mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad}\n`;
+            });
+
+            // Determinar si es dispositivo móvil o de escritorio
+            const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Construir el enlace de WhatsApp
+            let url = '';
+            if (esMovil) {
+                // Si es un dispositivo móvil, abrir en la aplicación de WhatsApp
+                url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
+            } else {
+                // Si es un dispositivo de escritorio, abrir en WhatsApp Web
+                url = `https://web.whatsapp.com/send?phone=573115288907&text=${encodeURIComponent(mensaje)}`;
+            }
+
+            // Abrir el enlace en una nueva ventana
+            window.open(url, '_blank');
+        });
+    }
 
     renderizarProductosEnCarrito() {
         const carProductsList = document.querySelector('.car-products');
         if (this.getProductos().length > 0) {
             carProductsList.innerHTML = '';
+            const whatsappButtonContainer = document.createElement('div');
+            whatsappButtonContainer.classList.add('whatsapp-button-container');
+            whatsappButtonContainer.id = 'boton-whatsapp';
+            whatsappButtonContainer.style.marginTop = '10px';
+            whatsappButtonContainer.style.textAlign = 'center';
+            const whatsappButton = document.createElement('button');
+            whatsappButton.classList.add('btn', 'btn-sm', 'btn-success', 'send-whatsapp');
+            whatsappButton.textContent = 'Enviar por WhatsApp';
+            whatsappButtonContainer.appendChild(whatsappButton);
+    
             this.getProductos().forEach((producto, index) => {
                 if (index < 5) { // Limitar a mostrar solo los primeros cinco productos
                     const productElement = document.createElement('div');
@@ -168,6 +215,8 @@ export class CarritoDeCompras {
                 }
             });
     
+            carProductsList.appendChild(whatsappButtonContainer);
+    
             // Agregar scroll si hay más de cinco productos
             if (this.getProductos().length > 5) {
                 carProductsList.style.overflowY = 'scroll';
@@ -176,6 +225,10 @@ export class CarritoDeCompras {
                 carProductsList.style.overflowY = 'auto';
                 carProductsList.style.maxHeight = 'none';
             }
+    
+            // Llamar a la función para enviar productos por WhatsApp después de agregar el botón al DOM
+            this.enviarProductosPorWhatsApp();
+    
         } else {
             carProductsList.innerHTML = '<p class="text-center">No hay artículos</p>';
         }
@@ -189,7 +242,6 @@ export class CarritoDeCompras {
         carritoCounter.textContent = cantidadTotal;
     }
 
-    // Método para renderizar productos en el carrito y actualizar el contador
     // Método para renderizar productos en el carrito y actualizar el contador
     renderizarProductosEnCarritoYContador() {
         this.renderizarProductosEnCarrito();

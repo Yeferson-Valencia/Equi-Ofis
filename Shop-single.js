@@ -14,112 +14,64 @@ class shopSingle {
         const nombreProducto = document.querySelector('#product-name');
         const varValue = document.getElementById('var-value');
         const cantidadProducto = document.getElementById('product-quanity');
-
-        // Establecer el contenido de los elementos al valor correspondiente del producto
-        imagenProducto.src = this.producto.imagen; // Corrección: Utilizar directamente el atributo 'imagen'
-        nombreProducto.textContent = this.producto.nombre; // Corrección: Acceder directamente al atributo 'nombre'
-        cantidadProducto.textContent = this.producto.cantidad; // Corrección: Acceder directamente al atributo 'cantidad'
         const btnMinus = document.getElementById('btn-minus');
-        const btnPlus = document.getElementById('btn-plus');
-
+    
+        // Establecer el contenido de los elementos al valor correspondiente del producto
+        imagenProducto.src = producto.imagen; // Utilizar directamente el atributo 'imagen' del producto
+        nombreProducto.textContent = producto.nombre; // Acceder directamente al atributo 'nombre' del producto
+        varValue.textContent = producto.cantidad; // Mostrar la cantidad actual del producto
+        cantidadProducto.value = producto.cantidad; // Asignar la cantidad actual del producto al input
+    
         // Event listener para el botón de menos
         btnMinus.addEventListener('click', () => {
-            this.producto.cantidad--;
-            actualizarCantidad();
+            if (producto.cantidad > 0) {
+                producto.cantidad--;
+                actualizarCantidad();
+            }
         });
-
+    
         // Event listener para el botón de más
+        const btnPlus = document.getElementById('btn-plus');
         btnPlus.addEventListener('click', () => {
-            this.producto.cantidad++;
+            producto.cantidad++;
             actualizarCantidad();
         });
-
+    
         // Función para actualizar la cantidad en el DOM
         function actualizarCantidad() {
             varValue.textContent = producto.cantidad;
             cantidadProducto.value = producto.cantidad;
-
+    
+            // Actualizar estado del botón de menos
+            btnMinus.disabled = (producto.cantidad === 0);
+    
+            // Actualizar cantidad en el carrito
             const productoEnCarrito = carrito.getProductoPorNombre(producto.nombre);
-            if (productoEnCarrito !== null) {
-                const cantidadEnCarrito = productoEnCarrito.cantidad;
-                if (cantidadEnCarrito > 0) {
-                    btnMinus.disabled = false; // Habilitar botón de menos si la cantidad en el carrito es mayor a cero
-                } else {
-                    if (parseInt(varValue.textContent) === 0) {
-                        btnMinus.disabled = true; // Deshabilitar botón de menos si la cantidad en el carrito es cero pero para valores negativos
-                    } else {
-                        btnMinus.disabled = false; // Habilitar botón de menos si la cantidad en el carrito es cero
-                    }
-                }
-
-                if (-cantidadEnCarrito === parseInt(varValue.textContent)) {
-                    btnMinus.disabled = true; // Deshabilitar botón de menos si la cantidad en el carrito es igual a la cantidad del producto en negativo
-                }
+            if (productoEnCarrito) {
+                productoEnCarrito.cantidad = producto.cantidad;
             } else {
                 console.log('No hay productos en el carrito');
             }
+            carrito.renderizarProductosEnCarritoYContador();
         }
-
-        // Llamar a la función para inicializar la cantidad
-        actualizarCantidad();
-
-        // Agregar producto al carrito 
+    
+        // Agregar producto al carrito
         const btnCompras = document.getElementById('btnCompras');
         btnCompras.addEventListener('click', (event) => {
             event.preventDefault();
-            if (producto.cantidad === 0) {
-                producto.cantidad = 1;
+            if (producto.cantidad > 0) {
                 carrito.agregarProducto(producto);
                 actualizarCantidad();
-                carrito.renderizarProductosEnCarritoYContador();
             } else {
-                carrito.agregarProducto(producto);
-                carrito.renderizarProductosEnCarritoYContador();
-                producto.cantidad = carrito.getProductoPorNombre(producto.nombre).cantidad;
-                actualizarCantidad();
-                carrito.renderizarProductosEnCarritoYContador();
+                console.log('No se puede agregar un producto con cantidad 0 al carrito.');
             }
         });
-
+    
+        // Llamar a la función para inicializar la cantidad
+        actualizarCantidad();
     }
+    
 
-    enviarProductosPorWhatsApp() {
-        const whatsappButton = document.getElementById('whatsappButton');
-
-        whatsappButton.addEventListener('click', () => {
-            // Obtener la cantidad total de productos en el carrito
-            const cantidadTotal = this.carrito.getCantidadTotal(); // Utiliza la instancia del carrito pasada al constructor
-
-            // Comprobar si hay productos en el carrito
-            if (cantidadTotal === 0) {
-                alert('No hay productos en el carrito.');
-                return; // Salir de la función si no hay productos en el carrito
-            }
-
-            let mensaje = "Hola, me gustaría conocer más detalles sobre estos productos:\n\n";
-
-            // Agregar cada producto al mensaje
-            this.carrito.productos.forEach(producto => {
-                mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad}\n`;
-            });
-
-            // Determinar si es dispositivo móvil o de escritorio
-            const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-            // Construir el enlace de WhatsApp
-            let url = '';
-            if (esMovil) {
-                // Si es un dispositivo móvil, abrir en la aplicación de WhatsApp
-                url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
-            } else {
-                // Si es un dispositivo de escritorio, abrir en WhatsApp Web
-                url = `https://web.whatsapp.com/send?phone=573115288907&text=${encodeURIComponent(mensaje)}`;
-            }
-
-            // Abrir el enlace en una nueva ventana
-            window.open(url, '_blank');
-        });
-    }
 
     cargarProductosDesdeCSV(url) {
         return fetch(url)
@@ -237,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderizar el carrito al cargar la página
     carrito.renderizarProductosEnCarritoYContador();
+    carrito.enviarProductosPorWhatsApp(); // Inicializar la funcionalidad de enviar productos por WhatsApp
 
     // Obtener el valor del parámetro producto de la URL
     const queryString = window.location.search;
@@ -249,12 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const producto = new Producto(productoJSON.nombre, productoJSON.clase, productoJSON.subclase, productoJSON.ReferecnaiaExterna, productoJSON.imagen, productoJSON.cantidad)
         const productoMostrar = new shopSingle(producto, carrito);
         productoMostrar.main(carrito, producto);
-        productoMostrar.enviarProductosPorWhatsApp();
 
     } else {
         const productoDefault = new Producto('sept_prodEspecializados_03', 'Puestos de Trabajo', 'Puestos de Trabajo', '', 'assets/Imagenes/Puestos de Trabajo/sept_prodEspecializados_03.jpg ');
         const productoMostrar = new shopSingle(productoDefault, carrito);
         productoMostrar.main(carrito, productoDefault);
-        productoMostrar.enviarProductosPorWhatsApp();
     }
 });

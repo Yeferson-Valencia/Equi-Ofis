@@ -256,7 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 tienda.cargarProductosYEventos();
                 tienda.carritoDeCompras.renderizarProductosEnCarritoYContador()
-
             })
             .catch(error => {
                 console.error('Error al cargar los productos:', error);
