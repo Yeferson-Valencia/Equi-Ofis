@@ -189,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderizar el carrito al cargar la página
     carrito.renderizarProductosEnCarritoYContador();
-    carrito.enviarProductosPorWhatsApp(); // Inicializar la funcionalidad de enviar productos por WhatsApp
 
     // Obtener el valor del parámetro producto de la URL
     const queryString = window.location.search;
