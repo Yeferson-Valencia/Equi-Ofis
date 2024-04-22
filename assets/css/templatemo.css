@@ -158,15 +158,14 @@ body, ul, li, p, a, label, input, div {
 }
 
 #boton-whatsapp {
-  position: relative; /* o absolute, dependiendo de tu layout */
-  z-index: 9999; /* Establecer un alto valor de z-index */
+  position: fixed; /* Cambiado a fixed para asegurar su visibilidad */
+  z-index: 999; /* Valor alto, pero no extremadamente alto */
 }
 
 .container.py-5 {
-  z-index: -1; /* Asegúrate de que sea menor que el del botón de WhatsApp */
+  z-index: auto; /* Esto debería permitir que se renderice normalmente */
   position: relative; /* Necesario para que z-index tenga efecto */
 }
-
 
 .car-products.active {
   display: block;
