@@ -157,6 +157,17 @@ body, ul, li, p, a, label, input, div {
   border-color: #5c636a
 }
 
+#boton-whatsapp {
+  position: relative; /* o absolute, dependiendo de tu layout */
+  z-index: 9999; /* Establecer un alto valor de z-index */
+}
+
+.container.py-5 {
+  z-index: -1; /* Asegúrate de que sea menor que el del botón de WhatsApp */
+  position: relative; /* Necesario para que z-index tenga efecto */
+}
+
+
 .car-products.active {
   display: block;
 }
