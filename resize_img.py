@@ -2,8 +2,8 @@ import os
 from PIL import Image
 
 # Ruta de la carpeta de origen y destino
-carpeta_origen = 'assets/Imagenes'
-carpeta_destino = 'assets/Imagenes2'
+carpeta_origen = '/home/yeferson/Escritorio/Equi-ofis/assets/Imagenes'
+carpeta_destino = '/home/yeferson/Escritorio/Equi-ofis/assets/Imagenes2'
 
 # Iterar sobre cada carpeta y subcarpeta en la carpeta de origen
 for ruta_carpeta_origen, carpetas, archivos in os.walk(carpeta_origen):
@@ -14,20 +14,13 @@ for ruta_carpeta_origen, carpetas, archivos in os.walk(carpeta_origen):
         
         # Verificar si el archivo es una imagen
         if os.path.isfile(ruta_origen) and archivo.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
+            # Crear la carpeta de destino si no existe
+            carpeta_destino_rel = os.path.join(carpeta_destino, os.path.relpath(ruta_carpeta_origen, carpeta_origen))
+            os.makedirs(carpeta_destino_rel, exist_ok=True)
+            
             # Abrir la imagen
             imagen = Image.open(ruta_origen)
             
-            # Redimensionar la imagen a 800x800
-            imagen_resized = imagen.resize((800, 800))
-            
-            # Obtener la ruta relativa de la carpeta actual en la carpeta de origen
-            carpeta_rel = os.path.relpath(ruta_carpeta_origen, carpeta_origen)
-            
-            # Obtener la ruta completa del archivo de destino
-            ruta_destino = os.path.join(carpeta_destino, carpeta_rel, archivo)
-            
-            # Crear la carpeta de destino si no existe
-            os.makedirs(os.path.dirname(ruta_destino), exist_ok=True)
-            
-            # Guardar la imagen redimensionada en la carpeta de destino
-            imagen_resized.save(ruta_destino)
+            # Optimizar y guardar la imagen
+            ruta_destino = os.path.join(carpeta_destino_rel, archivo)
+            imagen.save(ruta_destino, optimize=True)
