@@ -27,8 +27,8 @@ Table of contents
 
 /* Typography */
 body, ul, li, p, a, label, input, div {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px !important;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 20px !important;
   font-weight: 300 !important;
 }
 
@@ -39,18 +39,18 @@ body, ul, li, p, a, label, input, div {
 
 
 .h1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 48px !important;
-  font-weight: 200 !important;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 50px !important;
+  font-weight: 100 !important;
 }
 .h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poetsen One', sans-serif;
   font-size: 30px !important;
   font-weight: 300;
 }
 .h3 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 22px !important;
+  font-family: 'Poetsen One', sans-serif;
+  font-size: 18px !important;
 }
 /* General */
 .logo { font-weight: 500 !important;}
