@@ -135,12 +135,12 @@
 
     <!-- Start Content Page -->
     <section>
-        <div class="container-fluid py-5 position-relative gradient-background">
+        <div class="container-fluid py-5 position-relative gradient-background" style="background-color: #f0f0f0;">
             <div class="container py-5">
                 <div class="row">
                     <!-- Sección del mapa -->
                     <div class="col-md-6">
-                        <h3 class="h2 border-bottom pb-3 border-light text-center text-light">Encuéntranos aquí</h3>
+                        <h3 class="h2 border-bottom pb-3 border-light text-center h1">Encuéntranos aquí</h3>
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.1453081460645!2d-73.12492861465859!3d7.109153774572862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e683fc4e1e8d437%3A0xc2ac2217608ecaa5!2sMuebles%20Equi-Ofis!5e0!3m2!1ses!2sco!4v1711830797775!5m2!1ses!2sco" 
                                 width="100%" 
                                 height="450" 
@@ -152,31 +152,60 @@
                     </div>
                     <!-- Sección del formulario -->
                     <div class="col-md-6">
-                        <h3 class="h2 border-bottom pb-3 border-light text-center text-light">Contáctanos</h3>
-                        <form id="contactForm" method="post">
-                            <div class="mb-3">
-                                <label for="name" class="form-label text-light">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name" required placeholder="Monica Santander" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" title="Ingrese solo letras y espacios">
-                                <!-- El atributo pattern especifica una expresión regular para validar el nombre -->
+                        <h1 class="border-bottom pb-3 border-light text-center">Acerca de nosotros</h1>
+                        <div class="text-center">
+                            <p class="lead mb-4">
+                                Conscientes de la necesidad de economizar espacios que permitan un ambiente óptimo para el desarrollo de sus actividades, 
+                                así como de la comodidad que merece el personal de su institución, 
+                                ponemos a su disposición una amplia gama de muebles para su entidad, 
+                                que han sido sometidos a un estricto control de calidad. Debido a esto y a nuestros 30 años de experiencia, 
+                                podemos brindarle la mejor garantía del mercado con los precios más asequibles.
+                            </p>
+                            <div class="contact-info p-3 rounded">
+                                <h1 class="mb-1">Te esperamos!!</h1>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label text-light">Correo</label>
-                                <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com">
-                                <!-- El atributo type="email" ya realiza una comprobación básica de formato de correo electrónico -->
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label text-light">Mensaje</label>
-                                <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </form>                        
+                        </div>
+                    </div>                    
                     </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white text-dark py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="h3 mb-3">¡Bienvenido a Dr-Ofis!</h2>
+                    <p>Somos tu solución para el arreglo de sillas. Con más de 10 años de experiencia, nuestro equipo de expertos está aquí para asegurarnos de que tus sillas estén en perfectas condiciones para tu comodidad y satisfacción.</p>
+                    <form id="contactForm" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Monica Santander" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" title="Ingrese solo letras y espacios">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <img src="assets/Imagenes/Dr-Ofis.jpeg" alt="Dr-Ofis" class="img-fluid mb-3">
                 </div>
             </div>
         </div>
     </section>
     
-    <style>
+    
+    
+    
+    <!-- <style>
         .gradient-background {
             background-image: linear-gradient(to bottom right, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('assets/Imagenes/Dr-Ofis3.jpeg');
             background-size: auto;
@@ -190,7 +219,7 @@
         }
     
 
-    </style>
+    </style> -->
     
 
     <!-- End Content Page -->

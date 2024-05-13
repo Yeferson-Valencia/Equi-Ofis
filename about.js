@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var myModal = new bootstrap.Modal(document.getElementById('imageModal'), {
         keyboard: true
     });
-    myModal.show();
+    // myModal.show();
 
     // Funcionalidad para volver a abrir la ventana modal
     document.getElementById('openModalButton').addEventListener('click', function () {

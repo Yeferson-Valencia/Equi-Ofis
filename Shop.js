@@ -179,51 +179,66 @@ export class Tienda {
     renderizarProductosEnPagina(pagina, filtro = null) {
         const contenedor = document.querySelector('.col-lg-9');
         contenedor.innerHTML = '';
-
+        
         const productosFiltrados = this.filtrarProductos(filtro);
         const inicio = (pagina - 1) * this.productosPorPagina;
         const fin = Math.min(inicio + this.productosPorPagina, productosFiltrados.length);
-
+        
         // Calcula el número de columnas según el tamaño de la pantalla
-        const numColumnas = 4; // Mostrar cuatro imágenes por fila
-
-        // Recorre los productos para la página actual
-        let fila = document.createElement('div');
-        fila.classList.add('row', 'mb-4');
+        const numColumnas = 4; // Cambiamos el número de columnas a 4
+        
+        // Utilizamos un fragmento para optimizar la manipulación del DOM
+        const fragmento = document.createDocumentFragment();
+        
+        // Recorremos los productos para la página actual
         for (let i = inicio; i < fin; i++) {
             const producto = productosFiltrados[i];
             const path = producto.getImagen();
             const nombre = producto.getNombre();
         
-            // Crea la tarjeta de producto
-            const tarjeta = `
-            <div class="col-md-${12 / numColumnas} mb-4"> 
-                <div class="d-flex flex-wrap"> <!-- Asegúrate de agregar la clase "mb-4" para crear un espacio entre las tarjetas --> 
-                    <div class="card product-wap rounded-0 flex-fill" style=""> 
-                        <div class="card h-100"> <img class="card-img-top rounded-0 img-fluid w-100" src="${path}"> 
-                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center"> 
-                                <ul class="list-unstyled"> <li><a href="shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}" class="btn btn-success text-white mt-2 image-gallery-view"><i class="far fa-eye"></i></a></li> 
-                                    <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" data-producto="${i}"><i class="fas fa-cart-plus"></i></a></li> 
-                                </ul> 
-                            </div> 
+            // Creamos la tarjeta de producto
+            const tarjeta = document.createElement('div');
+            tarjeta.classList.add('col-md-' + (12 / numColumnas), 'mb-4', 'd-flex', 'align-items-stretch', 'grid-item');
+        
+            const contenidoTarjeta = `
+                <div class="card product-wap rounded-0 flex-fill d-flex flex-column"> 
+                    <div class="card h-100 d-flex flex-column"> 
+                        <div class="flex-grow-1">
+                            <img class="card-img-top rounded-0 img-fluid w-100" src="${path}" style="object-fit: cover; width: 100%; height: 100%;"> 
+                        </div>
+                        <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center"> 
+                            <ul class="list-unstyled"> 
+                                <li><a href="shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}" class="btn btn-success text-white mt-2 image-gallery-view"><i class="far fa-eye"></i></a></li> 
+                                <li><a class="btn btn-success text-white mt-2 image-gallery-add-to-cart" href="#" data-producto="${i}"><i class="fas fa-cart-plus"></i></a></li> 
+                            </ul> 
                         </div> 
                     </div> 
-                </div> 
-            </div>
+                </div>
             `;
+            tarjeta.innerHTML = contenidoTarjeta;
         
-            fila.innerHTML += tarjeta;
-
-            // Agrega la fila al contenedor cuando se llenen las columnas
-            if ((i + 1 - inicio) % numColumnas === 0 || i === fin - 1) {
-                contenedor.appendChild(fila);
-                fila = document.createElement('div');
-                fila.classList.add('row', 'mb-4');
-            }
+            // Agregamos la tarjeta al fragmento
+            fragmento.appendChild(tarjeta);
         }
-
-        // Agregar eventos para los productos filtrados
+        
+        // Agregamos el fragmento al contenedor
+        contenedor.appendChild(fragmento);
+        
+        // Inicializamos Masonry después de que todas las imágenes se hayan cargado
+        imagesLoaded(contenedor, function() {
+            // Inicializamos Masonry.js después de un pequeño retraso
+            setTimeout(function() {
+                var masonry = new Masonry(contenedor, {
+                    itemSelector: '.grid-item',
+                    columnWidth: contenedor.offsetWidth / numColumnas, // establecemos el ancho de la columna en función del ancho del contenedor y el número de columnas
+                    gutter: 20 // Espacio entre los elementos
+                });
+            }, 100); // retraso de 100 milisegundos
+        });
+        
+        // Agregamos eventos para los productos filtrados
         this.eventoProductosFiltrados();
+        
     }
 
     // Método para obtener los productos filtrados
