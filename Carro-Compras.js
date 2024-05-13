@@ -186,7 +186,7 @@ export class CarritoDeCompras {
                                 <img src="${producto.getImagen()}" alt="${producto.getNombre()}" style="width: 50px; height: 50px; max-width: 100%; max-height: 100%;">
                             </div>
                             <div class="product-details" style="flex: 2;">
-                                <p class="product-name" style="text-align: center;">${producto.getNombre()}</p>
+                                <p class="product-name" style="text-align: center;">${producto.subclase}</p>
                             </div>
                             <div class="product-quantity" style="flex: 1; display: flex; align-items: center; justify-content: flex-end;">
                                 <button class="btn btn-sm btn-secondary decrease-quantity">-</button>
