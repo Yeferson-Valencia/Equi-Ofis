@@ -39,6 +39,16 @@ Table of contents
 }
 
 
+.card-img-top {
+  height: 200px; /* Set the desired height */
+  width: auto; /* Let the width adjust automatically */
+  object-fit: cover; /* Scale and crop the image to fill the container */
+}
+
+
+
+
+
 /* Typography */
 body, ul, li, p, a, label, input, div {
   font-family: 'Poetsen One', sans-serif;
