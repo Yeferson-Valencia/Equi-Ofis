@@ -1,6 +1,5 @@
-// Importar la clase CarritoDeCompras
 import { CarritoDeCompras } from './Carro-Compras.js';
-import { Producto,  Tienda } from './Shop.js';
+import { Producto, Tienda } from './Shop.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const carrito = new CarritoDeCompras(); // Crear una instancia de CarritoDeCompras
@@ -15,21 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar productos desde el archivo CSV y renderizar los productos estrella
     tienda.cargarProductosDesdeCSV('productos.csv')
         .then(() => {
-            // Obtener los primeros 3 productos de la tienda
-            const productosTienda = tienda.productos.slice(0, 3);
+            // Obtener tres productos aleatorios de la tienda
+            const productosTienda = tienda.productos.sort(() => Math.random() - 0.5).slice(0, 3);
 
             // Obtener el contenedor de productos estrella
             const productosEstrellaContainer = document.getElementById('productos-estrella');
 
             // Iterar sobre los productos de la tienda y crear los elementos de tarjeta
             productosTienda.forEach(producto => {
-                // Crear un div de columna
-                const columna = document.createElement('div');
-                columna.classList.add('col-12', 'col-md-4', 'mb-4');
-
                 // Crear la tarjeta
                 const tarjeta = document.createElement('div');
-                tarjeta.classList.add('card', 'h-100');
+                tarjeta.classList.add('col-12', 'col-md-4', 'mb-4');
 
                 // Crear el enlace de la imagen
                 const enlaceImagen = document.createElement('a');
@@ -38,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Crear la imagen
                 const imagen = document.createElement('img');
                 imagen.src = producto.imagen;
-                imagen.classList.add('card-img-top');
+                imagen.classList.add('card-img-top', 'img-fluid');
                 imagen.alt = 'Producto';
+                imagen.style.height = '300px'; // Ajustar la altura de la imagen
 
                 // Añadir la imagen al enlace de la imagen
                 enlaceImagen.appendChild(imagen);
@@ -54,30 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 tituloProducto.classList.add('h2', 'text-decoration-none', 'text-dark');
                 tituloProducto.textContent = producto.nombre;
 
-                // Crear el texto de la tarjeta
-                const textoTarjeta = document.createElement('p');
-                // textoTarjeta.classList.add('card-text');
-                // textoTarjeta.textContent = 'Los mas vendidos';
-
                 // Crear el texto de reviews
                 const textoReviews = document.createElement('p');
                 textoReviews.classList.add('text-muted');
-                textoReviews.textContent = `Los mas vendidos`;
+                textoReviews.textContent = 'Los más vendidos';
 
                 // Añadir los elementos al cuerpo de la tarjeta
-                cuerpoTarjeta.appendChild(tituloProducto);
-                cuerpoTarjeta.appendChild(textoTarjeta);
                 cuerpoTarjeta.appendChild(textoReviews);
 
                 // Añadir el enlace de la imagen y el cuerpo de la tarjeta a la tarjeta
                 tarjeta.appendChild(enlaceImagen);
                 tarjeta.appendChild(cuerpoTarjeta);
 
-                // Añadir la tarjeta a la columna
-                columna.appendChild(tarjeta);
-
-                // Añadir la columna al contenedor de productos estrella
-                productosEstrellaContainer.appendChild(columna);
+                // Añadir la tarjeta al contenedor de productos estrella
+                productosEstrellaContainer.appendChild(tarjeta);
             });
         })
         .catch(error => {
