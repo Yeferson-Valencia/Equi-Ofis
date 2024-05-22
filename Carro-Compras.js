@@ -141,7 +141,9 @@ export class CarritoDeCompras {
 
             // Agregar cada producto al mensaje
             this.productos.forEach(producto => {
-                mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad}\n`;
+                //Modificar ruta base segun la url
+                const linkProducto = `http://127.0.0.1:3000/Escritorio/Equi-ofis/shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;
+                mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
             });
 
             // Determinar si es dispositivo móvil o de escritorio
