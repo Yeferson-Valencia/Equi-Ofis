@@ -142,8 +142,18 @@ export class CarritoDeCompras {
             // Agregar cada producto al mensaje
             this.productos.forEach(producto => {
                 //Modificar ruta base segun la url
-                const baseUrl = window.location.origin + window.location.pathname;
-                const linkProducto = `${baseUrl}?producto=${encodeURIComponent(JSON.stringify(producto))}`;
+                let baseUrl;
+
+                // Verificar si estamos en un entorno local o en un entorno de producción
+                if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
+                    // Entorno local
+                    baseUrl = window.location.origin + "/Escritorio/Equi-ofis/";
+                } else {
+                    // Entorno de producción (GitHub Pages)
+                    baseUrl = window.location.origin + "/Equi-Ofis/";
+                }
+                
+                const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
                 mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
             });
 
@@ -269,8 +279,6 @@ export class CarritoDeCompras {
 
 document.addEventListener('DOMContentLoaded', () => {
     const carritoIcon = document.getElementById('carrito-icon');
-
-    console.log(window.location.origin + window.location.pathname);
 
     carritoIcon.addEventListener('click', event => {
         event.preventDefault();
