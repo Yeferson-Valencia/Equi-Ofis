@@ -142,8 +142,8 @@ export class CarritoDeCompras {
             // Agregar cada producto al mensaje
             this.productos.forEach(producto => {
                 //Modificar ruta base segun la url
-                const baseURL = window.location.origin;
-                const linkProducto = `${baseURL}/Escritorio/Equi-ofis/shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;
+                const baseUrl = window.location.origin + window.location.pathname;
+                const linkProducto = `${baseUrl}?producto=${encodeURIComponent(JSON.stringify(producto))}`;
                 mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
             });
 
@@ -269,6 +269,8 @@ export class CarritoDeCompras {
 
 document.addEventListener('DOMContentLoaded', () => {
     const carritoIcon = document.getElementById('carrito-icon');
+
+    console.log(window.location.origin + window.location.pathname);
 
     carritoIcon.addEventListener('click', event => {
         event.preventDefault();
