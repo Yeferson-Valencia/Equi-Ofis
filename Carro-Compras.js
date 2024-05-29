@@ -125,53 +125,56 @@ export class CarritoDeCompras {
     }
 
     enviarProductosPorWhatsApp() {
-        const whatsappButton = document.getElementById('boton-whatsapp');
+        
+        const whatsappButtons = document.querySelectorAll('.send-whatsapp');
 
-        whatsappButton.addEventListener('click', () => {
-            // Obtener la cantidad total de productos en el carrito
-            const cantidadTotal = this.getCantidadTotal(); // Utiliza la instancia del carrito pasada al constructor
-
-            // Comprobar si hay productos en el carrito
-            if (cantidadTotal === 0) {
-                alert('No hay productos en el carrito.');
-                return; // Salir de la función si no hay productos en el carrito
-            }
-
-            let mensaje = "Hola, me gustaría conocer más detalles sobre estos productos:\n\n";
-
-            // Agregar cada producto al mensaje
-            this.productos.forEach(producto => {
-                //Modificar ruta base segun la url
-                let baseUrl;
-
-                // Verificar si estamos en un entorno local o en un entorno de producción
-                if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
-                    // Entorno local
-                    baseUrl = window.location.origin + "/Escritorio/Equi-ofis/";
-                } else {
-                    // Entorno de producción (GitHub Pages)
-                    baseUrl = window.location.origin + "/Equi-Ofis/";
+        whatsappButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Obtener la cantidad total de productos en el carrito
+                const cantidadTotal = this.getCantidadTotal(); // Utiliza la instancia del carrito pasada al constructor
+    
+                // Comprobar si hay productos en el carrito
+                if (cantidadTotal === 0) {
+                    alert('No hay productos en el carrito.');
+                    return; // Salir de la función si no hay productos en el carrito
                 }
-                
-                const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
-                mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
+    
+                let mensaje = "Hola, me gustaría conocer más detalles sobre estos productos:\n\n";
+    
+                // Agregar cada producto al mensaje
+                this.productos.forEach(producto => {
+                    //Modificar ruta base segun la url
+                    let baseUrl;
+    
+                    // Verificar si estamos en un entorno local o en un entorno de producción
+                    if (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost") {
+                        // Entorno local
+                        baseUrl = window.location.origin + "/Escritorio/Equi-ofis/";
+                    } else {
+                        // Entorno de producción (GitHub Pages)
+                        baseUrl = window.location.origin + "/Equi-Ofis/";
+                    }
+                    
+                    const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
+                    mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
+                });
+    
+                // Determinar si es dispositivo móvil o de escritorio
+                const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+                // Construir el enlace de WhatsApp
+                let url = '';
+                if (esMovil) {
+                    // Si es un dispositivo móvil, abrir en la aplicación de WhatsApp
+                    url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
+                } else {
+                    // Si es un dispositivo de escritorio, abrir en WhatsApp Web
+                    url = `https://web.whatsapp.com/send?phone=573178544869&text=${encodeURIComponent(mensaje)}`;
+                }
+    
+                // Abrir el enlace en una nueva ventana
+                window.open(url, '_blank');
             });
-
-            // Determinar si es dispositivo móvil o de escritorio
-            const esMovil = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-            // Construir el enlace de WhatsApp
-            let url = '';
-            if (esMovil) {
-                // Si es un dispositivo móvil, abrir en la aplicación de WhatsApp
-                url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
-            } else {
-                // Si es un dispositivo de escritorio, abrir en WhatsApp Web
-                url = `https://web.whatsapp.com/send?phone=573178544869&text=${encodeURIComponent(mensaje)}`;
-            }
-
-            // Abrir el enlace en una nueva ventana
-            window.open(url, '_blank');
         });
     }
 
