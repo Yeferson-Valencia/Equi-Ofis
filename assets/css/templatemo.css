@@ -56,6 +56,8 @@ body .h3 {
 .text-light { 
   color: #cfd6e1 !important;  
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important; /* Sombreado para resaltar el texto */}
+
+.bg-red { background-color: #991111 !important;} /* Rojo */
 .bg-dark { background-color: #212934 !important;}
 .bg-light { background-color: #e9eef5 !important;}
 .bg-black { background-color: #1d242d !important;}
