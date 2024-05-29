@@ -23,32 +23,6 @@ Table of contents
 16. Extra large devices (large desktops, 1200px and up)
 --------------------------------------------- */
 
-.text-container {
-  animation: fadeInUp 1s ease-in-out;
-}
-
-@keyframes fadeInUp {
-  0% {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  100% {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-
-.card-img-top {
-  height: 200px; /* Set the desired height */
-  width: auto; /* Let the width adjust automatically */
-  object-fit: cover; /* Scale and crop the image to fill the container */
-}
-
-
-
-
-
 /* Typography */
 body, ul, li, p, a, label, input, div {
   font-family: 'Poetsen One', sans-serif;
@@ -56,26 +30,24 @@ body, ul, li, p, a, label, input, div {
   font-weight: 300 !important;
 }
 
-.text-negrita {
-  color: white; /* Color del texto */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombreado para resaltar el texto */
-}
-
-
 .h1 {
   font-family: 'Poetsen One', sans-serif;
   font-size: 50px !important;
-  font-weight: 100 !important;
+  font-weight: 500 !important;
 }
+
 .h2 {
   font-family: 'Poetsen One', sans-serif;
-  font-size: 30px !important;
-  font-weight: 300;
+  font-size: 35px !important;
 }
-.h3 {
-  font-family: 'Poetsen One', sans-serif;
-  font-size: 18px !important;
+
+body .h3 {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: normal !important;
+  color: black; /* Añadido para asegurarnos de que no es un problema de color */
 }
+
 /* General */
 .logo { font-weight: 500 !important;}
 .text-warning {  color: #FFD700 !important;} /* Amarillo */
@@ -93,12 +65,12 @@ body, ul, li, p, a, label, input, div {
   border-color: #000000 !important; /* Amarillo */
 }
 
-
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
   background-color: #FF0000; /* Rojo */
   color: #fff;
 }
+
 /* Nav */
 #templatemo_nav_top { min-height: 40px;}
 #templatemo_nav_top * { font-size: .9em !important;}
@@ -108,11 +80,14 @@ body, ul, li, p, a, label, input, div {
 
 /* Hero Carousel */
 #template-mo-Equi-Ofis-hero-carousel { background: #efefef !important;}
+
 /* Accordion */
 .templatemo-accordion a { color: #000000;} /* Rojo */
 .templatemo-accordion a:hover { color: #FFD700;} /* Amarillo */
+
 /* Shop */
 .shop-top-menu a:hover { color: #FFD700 !important;} /* Amarillo */
+
 /* Product */
 .product-wap { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);}
 .product-wap .product-color-dot.color-dot-red { background:#FF0000;} /* Rojo */
@@ -136,6 +111,7 @@ body, ul, li, p, a, label, input, div {
   font-size: 15px;
   margin-top: 20px;
 }
+
 /* Brand */
 .brand-img {
   filter: grayscale(100%);
@@ -146,6 +122,7 @@ body, ul, li, p, a, label, input, div {
   filter: grayscale(0%);
   opacity: 1;
 }
+
 /* Carousel Hero */
 #template-mo-Equi-Ofis-hero-carousel .carousel-indicators li {
   margin-top: -50px;
@@ -156,6 +133,7 @@ body, ul, li, p, a, label, input, div {
   color: #FFD700 !important; /* Amarillo */
   font-size: 2.8em !important;
 }
+
 /* Carousel Brand */
 .tempaltemo-carousel .h1 {
   font-size: .5em !important;
@@ -195,19 +173,19 @@ body, ul, li, p, a, label, input, div {
   display: block;
 }
 
-
-.tempaltemo-carousel, .carousel-control-next, .carousel-control-prev, .carousel-item, .carousel, .carousel-control-inner, .carousel-indicators li, .carousel-indicators li.active, .carousel-indicators li:hover, .carousel-inner, .carousel-inner img{
+.tempaltemo-carousel, .carousel-control-next, .carousel-control-prev, .carousel-item, .carousel, .carousel-control-inner, .carousel-indicators li, .carousel-indicators li.active, .carousel-indicators li:hover, .carousel-inner, .carousel-inner img {
   background: white !important;
 }
-
 
 /* Services */
 .services-icon-wap {transition: .3s;}
 .services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
 .services-icon-wap:hover {background: #FFD700;} /* Amarillo */
+
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
 .form-control { border: 1px solid #e8e8e8;}
+
 /* Footer */
 #tempaltemo_footer a { color: #dcdde1;}
 #tempaltemo_footer a:hover { color: #FFD700;} /* Amarillo */
@@ -227,10 +205,6 @@ body, ul, li, p, a, label, input, div {
 }
 #tempaltemo_footer .border-light { border-color: #2d343f !important;}
 
-/*
-// Extra small devices (portrait phones, less than 576px)
-// No media query since this is the default in Bootstrap
-*/
 /* Small devices (landscape phones, 576px and up)*/
 .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {
   font-size: 12px !important;
@@ -246,15 +220,14 @@ body, ul, li, p, a, label, input, div {
   height: 100%; /* Establece una altura fija para mantener la relación de aspecto */
 }
 
-
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important; background: white;}
 }
 
-/*// Medium devices (tablets, 768px and up)*/
+/* Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   #templatemo_main_nav .navbar-nav {max-width: 450px; background: white;}
- }
+}
 
 /* Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {

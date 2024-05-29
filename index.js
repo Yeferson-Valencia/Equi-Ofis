@@ -20,8 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Obtener el contenedor de productos estrella
             const productosEstrellaContainer = document.getElementById('productos-estrella');
 
+            // Frases de los más vendidos
+            const frasesMasVendidos = ['Ambientes Corporativos', 'Mobiliario Ergonómico', 'Espacios Colaborativos'];
+
             // Iterar sobre los productos de la tienda y crear los elementos de tarjeta
-            productosTienda.forEach(producto => {
+            productosTienda.forEach((producto, index) => {
                 // Crear la tarjeta
                 const tarjeta = document.createElement('div');
                 tarjeta.classList.add('col-12', 'col-md-4', 'mb-4');
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Crear el texto de reviews
                 const textoReviews = document.createElement('p');
                 textoReviews.classList.add('text-muted');
-                textoReviews.textContent = 'Los más vendidos';
+                textoReviews.textContent = frasesMasVendidos[index]; // Usar la frase correspondiente al producto
 
                 // Añadir los elementos al cuerpo de la tarjeta
                 cuerpoTarjeta.appendChild(textoReviews);
