@@ -32,11 +32,12 @@ class ShopSingle {
     }
 
     actualizarInterfaz() {
-        const producto = this.productos[this.currentIndex];
-        this.imagenProducto.src = producto.imagen;
-        this.varValue.textContent = producto.cantidad;
-        this.btnMinus.disabled = (producto.cantidad === 0);
+        const producto = this.productos[this.currentIndex]; // Corregido
+        this.imagenProducto.src = producto.imagen; // Corregido
+        this.varValue.textContent = producto.cantidad; // Corregido
+        this.btnMinus.disabled = (producto.cantidad === 0); // Corregido
     }
+    
 
     onMinusClick() {
         if (this.productos[this.currentIndex].cantidad > 0) {
@@ -112,5 +113,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const shop = new ShopSingle(producto, carrito);
-    await shop.main();
+    await shop.main(); // Esperar a que los productos se carguen completamente
+
+    // Obtener el índice del producto después de que los productos se hayan cargado
+    const index = shop.productos.findIndex(p => p.nombre === producto.nombre); 
+    if (index !== -1) {
+        shop.currentIndex = index; // Establecer currentIndex en el índice del producto encontrado
+        shop.actualizarInterfaz(); // Actualizar la interfaz con el producto encontrado
+    }
 });
