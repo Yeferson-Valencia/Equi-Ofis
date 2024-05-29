@@ -156,7 +156,7 @@ export class CarritoDeCompras {
                     }
                     
                     const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
-                    mensaje += `- Producto: ${producto.nombre} | Cantidad: ${producto.cantidad} | Enlace: ${linkProducto}\n`;
+                    mensaje += `- Producto: ${linkProducto} | Cantidad: ${producto.cantidad}\n`;
                 });
     
                 // Determinar si es dispositivo móvil o de escritorio
