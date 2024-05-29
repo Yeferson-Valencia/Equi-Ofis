@@ -167,7 +167,7 @@ export class CarritoDeCompras {
                 url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
             } else {
                 // Si es un dispositivo de escritorio, abrir en WhatsApp Web
-                url = `https://web.whatsapp.com/send?phone=573115288907&text=${encodeURIComponent(mensaje)}`;
+                url = `https://web.whatsapp.com/send?phone=573178544869&text=${encodeURIComponent(mensaje)}`;
             }
 
             // Abrir el enlace en una nueva ventana

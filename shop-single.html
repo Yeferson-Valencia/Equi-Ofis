@@ -35,7 +35,9 @@
                     <a class="navbar-sm-brand text-light text-decoration-none"
                         href="mailto:comercial.equi.ofis@gmail.com">comercial.equi.ofis@gmail.com</a>
                     <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:6423599">6423599</a>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:6076423599">6076423599</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:316 4961968">316 4961968</a>
                     <i class="fa fa-phone mx-2"></i>
                     <a class="navbar-sm-brand text-light text-decoration-none" href="tel:317 8544869">317 8544869</a>
                 </div>
@@ -44,9 +46,8 @@
                         rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.instagram.com/mueblesequi_ofis/" target="_blank"><i
                             class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <!-- <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a> -->
                     <a class="text-light" href="https://web.whatsapp.com/send?phone=573115288907&text=Hola buenos, días me gustaría obtener información sobre sus productos" target="_blank"><i
-                        class="fab fa-whatsapp fa-sm fa-fw"></i></a>
+                            class="fab fa-whatsapp fa-sm fa-fw"></i></a>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                Equi-Ofis
+                <img src="./assets/Imagenes/EQUIOFIS LOGO.png" alt="Equi-Ofis Logo" style="width: 100%; height: auto;">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -120,58 +121,56 @@
     <!-- Open Content -->
     <section class="bg-light">
         <div class="container pb-5">
-            <div class="row">
-                <div class="col-lg-5 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 mt-5"> <!-- Ajuste el ancho de la columna -->
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="" alt="Card image cap" id="product-detail">
-                    </div>
-                </div>
-                <!-- col end -->
-                <div class="col-lg-7 mt-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="h2" id="product-name" style="visibility: hidden;"></h1>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <h6>Colores disponibles :</h6>
-                                </li>
-                                <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Todos los colores</strong></p>
-                                </li>
-                            </ul>
-                            <form action="" method="GET">
-                                <input type="hidden" name="product-title" value="">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <ul class="list-inline pb-3">
-                                            <li class="list-inline-item text-right">
-                                                Quantity
-                                                <input type="hidden" name="product-quanity" id="product-quanity" value="">
-                                            </li>
-                                            <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-minus">-</button></li>
-                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value"></span></li>
-                                            <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-plus">+</button></li>
-                                        </ul>
-                                    </div>
-                                    
-                                </div>      
-                                <div class="row pb-3">
-                                    <!-- <div class="col d-grid">
-                                        <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart" name="submit" value="buy" id="whatsappButton">Buy <i class="fab fa-whatsapp"></i></button>
-                                        <link rel="stylesheet"   crossorigin="anonymous" referrerpolicy="no-referrer" />
-                                    </div> -->
-                                    <div class="col d-grid">
-                                        <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart" id="btnCompras">Agregar Producto</button>
-                                    </div>
+                        <div class="row g-0">
+                            <div class="col-md-8"> <!-- Ajuste el ancho de la columna -->
+                                <img class="img-fluid" src="" alt="Producto" id="product-detail" style="width: 100%; height: auto;"> <!-- Cambie el estilo de la imagen -->
+                            </div>
+                            <div class="col-md-4 d-flex">
+                                <div class="card-body">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <h6>Colores disponibles:</h6>
+                                        </li>
+                                        <li class="list-inline-item color-info-container">
+                                            <p class="text-muted"><strong>Todos los colores</strong></p>
+                                        </li>
+                                    </ul>
+                                    <form action="" method="GET">
+                                        <input type="hidden" name="product-title" value="">
+                                        <div class="row justify-content-center">
+                                            <div class="col-auto">
+                                                <ul class="list-inline pb-3">
+                                                    <li class="list-inline-item text-right">                                                                                                    
+                                                        Cantidad
+                                                        <input type="hidden" name="product-quanity" id="product-quanity" value="">
+                                                    </li>
+                                                    <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-minus">-</button></li>
+                                                    <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                                    <li class="list-inline-item"><button type="button" class="btn btn-success" id="btn-plus">+</button></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <div class="col d-grid">
+                                                <button type="button" class="btn btn-success btn-lg product-detail-add-to-cart send-whatsapp" id="btnCompras">Enviar por Whatsapp</button>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button type="button" class="btn btn-primary" id="btn-prev">Anterior</button>
+                                            <button type="button" class="btn btn-primary" id="btn-next">Siguiente</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
+    </section>                                                            
     <!-- Close Content -->
 
     <!-- Start Footer -->
@@ -198,7 +197,7 @@
                 </div>
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Productos</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="#">Sillas</a></li>
                         <li><a class="text-decoration-none" href="#">Mesas</a></li>
@@ -229,7 +228,7 @@
             <div class="container">
                 <div class="row pt-2">
                     <div class="col-12">
-                        <p class="text-left text-light">
+                        <p class="text-left text-light text-center h3">
                             Copyright &copy; 2024 Equi-Ofis 
                             | Designed using a template from <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
                         </p>
