@@ -39,6 +39,7 @@ body, ul, li, p, a, label, input, div {
 .h2 {
   font-family: 'Poetsen One', sans-serif;
   font-size: 35px !important;
+  color: red; /* Añadido para asegurarnos de que no es un problema de color */
 }
 
 body .h3 {
@@ -48,18 +49,38 @@ body .h3 {
   color: black; /* Añadido para asegurarnos de que no es un problema de color */
 }
 
+/* Cambia el tamaño y la intensidad del placeholder */
+::placeholder {
+  font-size: 1em; /* Aumenta el tamaño del texto */
+  color: #888; /* Cambia el color del texto a un gris más oscuro */
+  opacity: 0.5; /* Asegura que el color se muestre correctamente en todos los navegadores */
+}
+
+/* Es necesario para soportar Internet Explorer */
+:-ms-input-placeholder {
+  font-size: 1em;
+  color: #888;
+  opacity: 0.5;
+}
+
+/* Es necesario para soportar Firefox */
+::-moz-placeholder {
+  font-size: 1em;
+  color: #888;
+  opacity: 0.5;
+}
 
 
 /* General */
 .logo { font-weight: 500 !important;}
 .text-warning {  color: #FFD700 !important;} /* Amarillo */
-.text-muted { color: #bcbcbc !important;}
+.text-muted { color: #ff0000 !important;}
 .text-success { color: #FF0000 !important;} /* Rojo */
 .text-light { 
   color: #ffffff !important;  
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important; /* Sombreado para resaltar el texto */}
 
-.bg-red { background-color: #991111 !important;} /* Rojo */
+.bg-red { background-color: #ff0000 !important;} /* Rojo */
 .bg-dark { background-color: #212934 !important;}
 .bg-light { background-color: #e9eef5 !important;}
 .bg-black { background-color: #1d242d !important;}
@@ -77,7 +98,7 @@ body .h3 {
 
 /* Nav */
 #templatemo_nav_top { min-height: 40px;}
-#templatemo_nav_top * { font-size: .9em !important;}
+#templatemo_nav_top * { font-size: 1em !important;}
 #templatemo_main_nav a { color: #FF0000;} /* Rojo */
 #templatemo_main_nav a:hover { color: #FFD700;} /* Amarillo */
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
@@ -188,7 +209,7 @@ body .h3 {
 
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
-.form-control { border: 1px solid #e8e8e8;}
+.form-control { border: 1px solid #e8e8e8; opacity: 0.5;}
 
 /* Footer */
 #tempaltemo_footer a { color: #dcdde1;}
