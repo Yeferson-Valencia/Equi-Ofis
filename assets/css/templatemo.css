@@ -48,13 +48,15 @@ body .h3 {
   color: black; /* Añadido para asegurarnos de que no es un problema de color */
 }
 
+
+
 /* General */
 .logo { font-weight: 500 !important;}
 .text-warning {  color: #FFD700 !important;} /* Amarillo */
 .text-muted { color: #bcbcbc !important;}
 .text-success { color: #FF0000 !important;} /* Rojo */
 .text-light { 
-  color: #cfd6e1 !important;  
+  color: #ffffff !important;  
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important; /* Sombreado para resaltar el texto */}
 
 .bg-red { background-color: #991111 !important;} /* Rojo */

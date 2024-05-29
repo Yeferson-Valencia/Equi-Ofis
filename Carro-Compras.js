@@ -166,7 +166,7 @@ export class CarritoDeCompras {
                 let url = '';
                 if (esMovil) {
                     // Si es un dispositivo móvil, abrir en la aplicación de WhatsApp
-                    url = `https://wa.me/573115288907?text=${encodeURIComponent(mensaje)}`;
+                    url = `https://wa.me/573178544869?text=${encodeURIComponent(mensaje)}`;
                 } else {
                     // Si es un dispositivo de escritorio, abrir en WhatsApp Web
                     url = `https://web.whatsapp.com/send?phone=573178544869&text=${encodeURIComponent(mensaje)}`;
