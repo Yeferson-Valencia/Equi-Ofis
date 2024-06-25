@@ -10,16 +10,16 @@ carrito.cargarProductosDelAlmacenamientoLocal();
 carrito.renderizarProductosEnCarritoYContador();
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Abrir automáticamente la ventana modal al cargar la página
-    var myModal = new bootstrap.Modal(document.getElementById('imageModal'), {
-        keyboard: true
-    });
-    // myModal.show();
+    // // Abrir automáticamente la ventana modal al cargar la página
+    // var myModal = new bootstrap.Modal(document.getElementById('imageModal'), {
+    //     keyboard: true
+    // });
+    // // myModal.show();
 
-    // Funcionalidad para volver a abrir la ventana modal
-    document.getElementById('openModalButton').addEventListener('click', function () {
-        myModal.show();
-    });
+    // // Funcionalidad para volver a abrir la ventana modal
+    // document.getElementById('openModalButton').addEventListener('click', function () {
+    //     myModal.show();
+    // });
 
     // Escuchar el evento de envío del formulario
     document.getElementById('contactForm').addEventListener('submit', function(event) {
@@ -47,5 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Abrir el enlace en una nueva ventana
         window.open(url, '_blank');
+    });
+    const filtro = document.querySelectorAll('.filtro');
+
+    //Ir a la pagina de productos y usar el filtro
+    filtro.forEach(filtro => {
+    filtro.addEventListener('click', () => {
+        const fil = filtro.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+        // Modificar la URL para incluir el filtro como un parámetro de consulta
+        window.location.href = `shop.html?filtro=${encodeURIComponent(fil)}`;
+        });
     });
 });

@@ -121,4 +121,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         shop.currentIndex = index; // Establecer currentIndex en el índice del producto encontrado
         shop.actualizarInterfaz(); // Actualizar la interfaz con el producto encontrado
     }
+
+    const filtro = document.querySelectorAll('.filtro');
+
+    //Ir a la pagina de productos y usar el filtro
+    filtro.forEach(filtro => {
+    filtro.addEventListener('click', () => {
+        const fil = filtro.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+        // Modificar la URL para incluir el filtro como un parámetro de consulta
+        window.location.href = `shop.html?filtro=${encodeURIComponent(fil)}`;
+        });
+    });
 });

@@ -48,7 +48,9 @@ export class Tienda {
         this.rutaBaseImagenes = 'assets/Imagenes/'; // Ruta base para las imágenes
         this.productosPorPagina = 12;
         this.paginaActual = 1;
-        this.filtroActual = null;
+        // Intentar obtener el filtro de la URL
+        const parametrosURL = new URLSearchParams(window.location.search);
+        this.filtroActual = parametrosURL.get('filtro') || null;   
     }
 
     // Método para manejar los eventos
@@ -110,9 +112,13 @@ export class Tienda {
         // Renderizar los productos en el carrito y actualizar el contador
         this.carritoDeCompras.cargarProductosDelAlmacenamientoLocal();
         this.carritoDeCompras.renderizarProductosEnCarritoYContador();
-
+        if(this.filtroActual){
+            this.renderizarProductosEnPagina(1, this.filtroActual);
+        }else{
         // Renderizar los productos en la página inicial
         this.renderizarProductosEnPagina(1);
+        }
+
 
         // Manejar eventos
         this.manejarEventos();
@@ -249,12 +255,12 @@ export class Tienda {
         return this.productos.filter(producto => producto.clase === filtro || producto.subclase === filtro);
     }
 
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.endsWith('/shop.html')) {
         const tienda = new Tienda();
+        console.log(tienda.filtroActual)
         tienda.cargarProductosDesdeCSV('productos.csv')
             .then(() => {
                 tienda.cargarProductosYEventos();
@@ -264,5 +270,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error al cargar los productos:', error);
             });
     }
+    const filtro = document.querySelectorAll('.filtro');
+
+    //Ir a la pagina de productos y usar el filtro
+    filtro.forEach(filtro => {
+    filtro.addEventListener('click', () => {
+        const fil = filtro.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+        // Modificar la URL para incluir el filtro como un parámetro de consulta
+        window.location.href = `shop.html?filtro=${encodeURIComponent(fil)}`;
+        });
+    });
 });
 

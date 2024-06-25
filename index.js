@@ -72,4 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error al cargar los productos:', error);
         });
+
+    const filtro = document.querySelectorAll('.filtro');
+
+    //Ir a la pagina de productos y usar el filtro
+    filtro.forEach(filtro => {
+    filtro.addEventListener('click', () => {
+        const fil = filtro.textContent.trim(); // Obtener el valor del filtro (nombre de la clase)
+        // Modificar la URL para incluir el filtro como un parámetro de consulta
+        window.location.href = `shop.html?filtro=${encodeURIComponent(fil)}`;
+        });
+    });
+
 });
