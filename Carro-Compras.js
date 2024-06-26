@@ -139,7 +139,7 @@ export class CarritoDeCompras {
                     return; // Salir de la función si no hay productos en el carrito
                 }
     
-                let mensaje = "Hola, me gustaría conocer más detalles sobre estos productos:\n\n";
+                let mensaje = "Buen día, me gustaría obtener información sobre sus productos:\n\n";
     
                 // Agregar cada producto al mensaje
                 this.productos.forEach(producto => {
