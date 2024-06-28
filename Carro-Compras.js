@@ -152,7 +152,7 @@ export class CarritoDeCompras {
                         baseUrl = window.location.origin + "/Escritorio/Equi-ofis/";
                     } else {
                         // Entorno de producción (GitHub Pages)
-                        baseUrl = window.location.origin;
+                        baseUrl = window.location.origin + "/";
                     }
                     
                     const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
