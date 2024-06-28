@@ -152,7 +152,7 @@ export class CarritoDeCompras {
                         baseUrl = window.location.origin + "/Escritorio/Equi-ofis/";
                     } else {
                         // Entorno de producción (GitHub Pages)
-                        baseUrl = window.location.origin + "/Equi-Ofis/";
+                        baseUrl = window.location.origin;
                     }
                     
                     const linkProducto = `${baseUrl}shop-single.html?producto=${encodeURIComponent(JSON.stringify(producto))}`;                
@@ -174,6 +174,7 @@ export class CarritoDeCompras {
     
                 // Abrir el enlace en una nueva ventana
                 window.open(url, '_blank');
+                console.log(mensaje)
             });
         });
     }
