@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- <link rel="apple-touch-icon" href="assets/img/apple-icon.png"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/Imagenes/favicon.ico">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/templatemo.css">
@@ -44,12 +44,20 @@
                 <div>
                     <a class="text-light" href="https://www.facebook.com/MueblesEquiOfis/" target="_blank" rel="sponsored"><img src="./assets/Imagenes/facebook.png" alt="Facebook" style="width: 25px; height: 25px; margin-right: 10px;"></a>
                     <a class="text-light" href="https://www.instagram.com/mueblesequi_ofis/" target="_blank"><img src="./assets/Imagenes/instagram.png" alt="Instagram" style="width: 25px; height: 25px; margin-right: 10px;"></a>
-                    <a class="text-light" href="https://web.whatsapp.com/send?phone=573115288907&text=Hola buenos, días me gustaría obtener información sobre sus productos" target="_blank"><img src="./assets/Imagenes/whatsapp.png" alt="WhatsApp" style="width: 25px; height: 25px; margin-right: 10px;"></a>
+                    <a id="whatsapp-link" class="text-light" href="https://wa.me/573178544869?text=Buen día, me gustaría obtener información sobre sus productos." target="_blank"><img src="./assets/Imagenes/whatsapp.png" alt="WhatsApp" style="width: 25px; height: 25px; margin-right: 10px;"></a>
                 </div>
             </div>
         </div>
     </nav>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            var whatsappLink = document.getElementById('whatsapp-link');
+            if (!isMobile) {
+                whatsappLink.href = "https://web.whatsapp.com/send?phone=573178544869&text=Buen día, me gustaría obtener información sobre sus productos.";
+            }
+        });
+    </script>
     
     <!-- Close Top Nav -->
 
@@ -58,7 +66,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                <img class="logo-image" src="./assets/Imagenes/EQUIOFIS LOGO.png" alt="Equi-Ofis Logo">
+                <img class="logo-image" src="./assets/Imagenes/EQUIOFIS LOGO.png" alt="Equi-Ofis Logo" style="width: 100%; height: auto;">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -199,8 +207,12 @@
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
                             <a class="text-decoration-none" href="tel:6076423599">6076423599</a>
+                        </li>
+                        <li>
                             <i class="fa fa-phone fa-fw"></i>
                             <a class="text-decoration-none" href="tel:316 4961968">316 4961968</a>
+                        </li>
+                        <li>
                             <i class="fa fa-phone fa-fw"></i>
                             <a class="text-decoration-none" href="tel:317 8544869">317 8544869</a>
                         </li>

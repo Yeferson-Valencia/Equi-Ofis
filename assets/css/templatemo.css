@@ -69,7 +69,9 @@ body .h3 {
   color: #888;
   opacity: 0.5;
 }
-
+.d-none {
+  display: flex !important;
+}
 
 /* General */
 .logo { font-weight: 500 !important;}
